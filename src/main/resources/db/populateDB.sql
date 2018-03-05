@@ -1,8 +1,8 @@
 DELETE FROM user;
-ALTER SEQUENCE global_seq RESTART WITH 100000;
+ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
 
-INSERT INTO user (name, email, password) VALUES
+INSERT INTO user (name, email, password, isadmin) VALUES
   ('User', 'user@yandex.ru', 'password'),
-  ('Admin', 'admin@gmail.com', 'admin');
+  ('Admin', 'admin@gmail.com', 'admin', TRUE );
 
 
