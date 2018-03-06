@@ -15,7 +15,7 @@ import java.util.Date;
 //        @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM ru.dsoccer1980.dishvote.model.User u WHERE u.email=?1"),
 //        @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM ru.dsoccer1980.dishvote.model.User u ORDER BY u.name, u.email"),
 //})
-//@Entity
+@Entity
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractNamedEntity {
 

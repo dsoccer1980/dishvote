@@ -8,15 +8,15 @@
 </head>
 <body>
 <section>
-Hi
+
     <table border="1" cellpadding="8" cellspacing="0">
-        <%--<c:forEach items="${workers}" var="worker">--%>
-            <%--<jsp:useBean id="worker" scope="page" type="ru.dsoccer1980.dishvote.model.Worker"/>--%>
+        <c:forEach items="${dishes}" var="dish">
+            <jsp:useBean id="dish" scope="page" type="ru.dsoccer1980.dishvote.model.Dish"/>
             <tr>
-               <td>${workers.name}</td>
-                <%--<td>${workers.name}</td>--%>
+               <td>${dish.name}</td>
+                <td>${dish.restaurant.name}</td>
             </tr>
-          <%--</c:forEach>--%>
+          </c:forEach>
     </table>
 </section>
 </body>

@@ -7,13 +7,13 @@
     <display-name>dishvote</display-name>
 
     <servlet>
-        <servlet-name>workerServlet</servlet-name>
-        <servlet-class>ru.dsoccer1980.dishvote.web.WorkerServlet</servlet-class>
+        <servlet-name>restaurantServlet</servlet-name>
+        <servlet-class>ru.dsoccer1980.dishvote.web.RestaurantServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>workerServlet</servlet-name>
-        <url-pattern>/workers</url-pattern>
+        <servlet-name>restaurantServlet</servlet-name>
+        <url-pattern>/restaurant</url-pattern>
     </servlet-mapping>
 
 

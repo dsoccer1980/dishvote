@@ -1,0 +1,31 @@
+package ru.dsoccer1980.dishvote.web;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import ru.dsoccer1980.dishvote.model.Dish;
+import ru.dsoccer1980.dishvote.service.DishService;
+
+import java.util.List;
+
+@Controller
+public class DishRestController {
+    private static final Logger log = LoggerFactory.getLogger(DishRestController.class);
+
+    private final DishService service;
+
+    @Autowired
+    public DishRestController(DishService service) {
+        this.service = service;
+    }
+
+    public Dish get(int id) {
+        return service.get(id);
+    }
+
+    public List<Dish> getAll() {
+        return service.getAll();
+    }
+
+}

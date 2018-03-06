@@ -1,14 +1,12 @@
 package ru.dsoccer1980.dishvote.model;
 
-import ru.dsoccer1980.dishvote.model.AbstractBaseEntity;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
-//@MappedSuperclass
+@MappedSuperclass
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 
     @NotBlank
