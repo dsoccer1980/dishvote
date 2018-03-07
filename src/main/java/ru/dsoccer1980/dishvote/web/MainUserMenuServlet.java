@@ -14,8 +14,8 @@ import java.io.IOException;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class MenuServlet extends HttpServlet {
-    private static final Logger log = getLogger(MenuServlet.class);
+public class MainUserMenuServlet extends HttpServlet {
+    private static final Logger log = getLogger(MainUserMenuServlet.class);
 
     private ConfigurableApplicationContext springContext;
     private UserRestController userController;

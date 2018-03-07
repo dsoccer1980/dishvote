@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>menuServlet</servlet-name>
-        <servlet-class>ru.dsoccer1980.dishvote.web.MenuServlet</servlet-class>
+        <servlet-class>ru.dsoccer1980.dishvote.web.MainUserMenuServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>

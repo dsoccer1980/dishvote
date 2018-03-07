@@ -22,6 +22,7 @@ public class UserVoteRepositoryImpl implements UserVoteRepository {
     @Override
     @Transactional
     public UserVote save(User user, Restaurant restaurant) {
+        //TODO LocalDate.now()
         UserVote userVote = new UserVote(null, user, restaurant, LocalDate.now());
         em.persist(userVote);
         return userVote;

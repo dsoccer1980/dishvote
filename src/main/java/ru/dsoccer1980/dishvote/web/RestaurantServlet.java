@@ -48,7 +48,7 @@ public class RestaurantServlet extends HttpServlet {
         }
 
         request.setAttribute("dishes", dishController.getAll());
-        request.getRequestDispatcher("/dishes.jsp").forward(request, response);
+        request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
     }
 
     @Override

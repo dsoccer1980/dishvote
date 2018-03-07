@@ -10,11 +10,14 @@
 <section>
 
 
-    Hello <c:out value="${userName.name}"/>  <br>
-
     <a href="">profile</a>    <br>
     <a href="voteChooseDate.jsp">vote</a>       <br>
     <a href=""></a>           <br>
+
+    <form action="userVote?action=chosenDate" method="post">
+        <input type="date"  name="date" required>
+        <button type="submit">Choose</button>
+    </form>
 
 
 </section>

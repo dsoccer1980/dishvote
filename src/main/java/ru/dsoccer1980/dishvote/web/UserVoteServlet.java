@@ -3,6 +3,7 @@ package ru.dsoccer1980.dishvote.web;
 import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.dsoccer1980.dishvote.web.dish.DishRestController;
 import ru.dsoccer1980.dishvote.web.vote.UserVoteRestController;
 
 import javax.servlet.ServletConfig;
@@ -18,13 +19,15 @@ public class UserVoteServlet extends HttpServlet {
     private static final Logger log = getLogger(UserVoteServlet.class);
 
     private ConfigurableApplicationContext springContext;
-    private UserVoteRestController userVoteRestController;
+    private UserVoteRestController userVoteController;
+    private DishRestController dishController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-        userVoteRestController = springContext.getBean(UserVoteRestController.class);
+        userVoteController = springContext.getBean(UserVoteRestController.class);
+        dishController = springContext.getBean(DishRestController.class);
     }
 
     @Override
@@ -35,9 +38,17 @@ public class UserVoteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
-        userVoteRestController.save(userId, restaurantId);
+        String action = request.getParameter("action");
+
+        if ("chosenDate".equals(action)) {
+            request.setAttribute("dishes", dishController.getAll());
+            request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
+        }
+        else {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
+            userVoteController.save(userId, restaurantId);
+        }
     }
 
 
