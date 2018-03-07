@@ -8,6 +8,7 @@ import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.service.DishService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DishRestController {
@@ -24,7 +25,7 @@ public class DishRestController {
         return service.get(id);
     }
 
-    public List<Dish> getAll() {
+    public Map<Integer, List<Dish>> getAll() {
         return service.getAll();
     }
 

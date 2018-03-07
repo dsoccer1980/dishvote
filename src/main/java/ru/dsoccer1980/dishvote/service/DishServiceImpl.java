@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.repository.DishRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DishServiceImpl implements DishService {
@@ -23,8 +26,19 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getAll() {
-        return repository.getAll();
+    public Map<Integer, List<Dish>> getAll() {
+        Map<Integer, List<Dish>> result = new HashMap<>();
+        for (Dish dish : repository.getAll()) {
+            Integer restaurantId = dish.getRestaurant().getId();
+            if (result.containsKey(restaurantId)) {
+                result.get(restaurantId).add(dish);
+            } else {
+                List<Dish> dishes =new ArrayList<>();
+                dishes.add(dish);
+                result.put(restaurantId, dishes);
+            }
+        }
+        return result;
     }
 
 }
