@@ -3,6 +3,8 @@ package ru.dsoccer1980.dishvote.web;
 import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.dsoccer1980.dishvote.web.dish.DishRestController;
+import ru.dsoccer1980.dishvote.web.restaurant.RestaurantRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -36,7 +38,8 @@ public class RestaurantServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //int userId = Integer.parseInt(request.getParameter("userId"));
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        AuthorizedUser.setId(userId);
         String submit = request.getParameter("submit");
         if (submit != null) {
             String restaurantName = request.getParameter("name");

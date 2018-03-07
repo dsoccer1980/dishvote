@@ -1,4 +1,4 @@
-package ru.dsoccer1980.dishvote.web;
+package ru.dsoccer1980.dishvote.web.dish;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
