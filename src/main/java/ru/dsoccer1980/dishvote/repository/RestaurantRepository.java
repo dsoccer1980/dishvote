@@ -11,5 +11,7 @@ public interface RestaurantRepository {
 
     List<Restaurant> getAll();
 
+    Restaurant save(Restaurant restaurant);
+
 
 }

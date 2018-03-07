@@ -11,11 +11,10 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class RestaurantRepositoryImpl implements RestaurantRepository {
+public class RestaurantRepositoryImpl implements RestaurantRepository{
 
     @PersistenceContext
     private EntityManager em;
-
 
     @Override
     public Restaurant get(int id) {
@@ -26,6 +25,13 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     @Override
     public List<Restaurant> getAll() {
         return em.createNamedQuery(Restaurant.GET_ALL_RESTAURANTS, Restaurant.class).getResultList();
+    }
+
+    @Override
+    @Transactional
+    public Restaurant save(Restaurant restaurant) {
+        em.persist(restaurant);
+        return restaurant;
     }
 
 }

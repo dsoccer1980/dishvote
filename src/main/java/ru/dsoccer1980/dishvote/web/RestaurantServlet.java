@@ -36,14 +36,21 @@ public class RestaurantServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("userId"));
+        //int userId = Integer.parseInt(request.getParameter("userId"));
+        String submit = request.getParameter("submit");
+        if (submit != null) {
+            String restaurantName = request.getParameter("name");
+            String restaurantAddress = request.getParameter("address");
+            restaurantController.save(restaurantName, restaurantAddress);
+        }
+
         request.setAttribute("dishes", dishController.getAll());
         request.getRequestDispatcher("/dishes.jsp").forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("forward to users");
-        request.getRequestDispatcher("/users.jsp").forward(request, response);
+        log.debug("forward to restaurant");
+        request.getRequestDispatcher("/restaurant.jsp").forward(request, response);
     }
 }

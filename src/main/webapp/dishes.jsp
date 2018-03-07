@@ -8,7 +8,7 @@
 </head>
 <body>
 <section>
-    <form method="post" action="vote">
+    <form method="post" action="userVote">
     <table border="1" cellpadding="8" cellspacing="0">
         <c:forEach items="${dishes}" var="entry">
             <tr>
@@ -19,10 +19,12 @@
                 </c:if>
                     <td>${dish.name}</td>
             </c:forEach>
-                <td> <input type="radio" name="voting" value="${entry.key}"></td>
+                <td> <input type="radio" name="restaurantId" value="${entry.key}"></td>
+                <input type="hidden" name="userId" value="100000">
             </tr>
         </c:forEach>
     </table>
+        <input type="submit" name="submit">
     </form>
 </section>
 </body>

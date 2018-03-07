@@ -28,4 +28,7 @@ public class RestaurantRestController {
         return service.getAll();
     }
 
+    public void save(String restaurantName, String restaurantAddress) {
+        service.save(restaurantName, restaurantAddress);
+    }
 }

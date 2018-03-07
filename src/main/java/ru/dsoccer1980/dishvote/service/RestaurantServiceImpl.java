@@ -27,4 +27,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         return repository.getAll();
     }
 
+    @Override
+    public void save(String restaurantName, String restaurantAddress) {
+        Restaurant restaurant = new Restaurant(null, restaurantName, restaurantAddress);
+        repository.save(restaurant);
+
+    }
+
 }

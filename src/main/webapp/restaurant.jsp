@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Workers</title>
+    <title>Restaurant</title>
 
 </head>
 <body>
@@ -18,6 +18,12 @@
             </tr>
           </c:forEach>
     </table>
+
+    <form action="restaurant" method="post">
+        <input type="text" name="name">
+        <input type="text" name="address">
+        <input type="submit" name="submit" value="submit">
+    </form>
 </section>
 </body>
 </html>

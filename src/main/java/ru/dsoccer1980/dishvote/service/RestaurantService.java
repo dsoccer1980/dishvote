@@ -9,4 +9,5 @@ public interface RestaurantService {
 
     List<Restaurant> getAll();
 
+    void save(String restaurantName, String restaurantAddress);
 }
