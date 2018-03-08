@@ -8,6 +8,7 @@ import ru.dsoccer1980.dishvote.model.UserVote;
 import ru.dsoccer1980.dishvote.service.UserVoteService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Controller
@@ -23,6 +24,10 @@ public class UserVoteRestController {
 
     public UserVote save(Integer userId, Integer restaurantId, LocalDate date) {
         return service.save(userId, restaurantId, date);
+    }
+
+    public List<UserVote> getAllVotesForUser(int userId) {
+        return service.getAllVotesForUser(userId);
     }
 
 

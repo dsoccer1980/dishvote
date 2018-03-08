@@ -26,6 +26,17 @@
     </table>
         <input type="submit" name="submit">
     </form>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+    <c:forEach items="${allVotesForUser}" var="userVote">
+        <jsp:useBean id="userVote" scope="page" type="ru.dsoccer1980.dishvote.model.UserVote"/>
+        <tr>
+             <td>${userVote.restaurant.name}</td>
+             <td>${userVote.date}</td>
+        </tr>
+    </c:forEach>
+    </table>
+
 </section>
 </body>
 </html>

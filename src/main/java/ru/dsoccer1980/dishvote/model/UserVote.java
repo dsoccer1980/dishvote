@@ -8,7 +8,10 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_vote")
+@NamedQuery(name = UserVote.GET_ALL_USERVOTES, query = "SELECT uv FROM UserVote uv LEFT JOIN FETCH uv.restaurant WHERE uv.user=:user")
 public class UserVote extends AbstractBaseEntity {
+
+    public static final String GET_ALL_USERVOTES = "UserVote.getAllUserVotes";
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)

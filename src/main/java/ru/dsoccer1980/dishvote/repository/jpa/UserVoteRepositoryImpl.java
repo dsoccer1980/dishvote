@@ -10,6 +10,7 @@ import ru.dsoccer1980.dishvote.repository.UserVoteRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
@@ -18,7 +19,6 @@ public class UserVoteRepositoryImpl implements UserVoteRepository {
     @PersistenceContext
     private EntityManager em;
 
-
     @Override
     @Transactional
     public UserVote save(User user, Restaurant restaurant, LocalDate date) {
@@ -26,6 +26,13 @@ public class UserVoteRepositoryImpl implements UserVoteRepository {
         UserVote userVote = new UserVote(null, user, restaurant, date);
         em.persist(userVote);
         return userVote;
+    }
+
+    @Override
+    public List<UserVote> getAllVotesForUser(User user) {
+        return em.createNamedQuery(UserVote.GET_ALL_USERVOTES, UserVote.class)
+                .setParameter("user", user)
+                .getResultList();
     }
 
 }

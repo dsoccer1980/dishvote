@@ -40,19 +40,25 @@ public class UserVoteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        int userId = AuthorizedUser.id();
 
         if ("chosenDate".equals(action)) {
             LocalDate date = LocalDate.parse(request.getParameter("date"));
+
             request.setAttribute("date", date);
             request.setAttribute("dishes", dishController.getAll());
+            request.setAttribute("allVotesForUser", userVoteController.getAllVotesForUser(userId));
+
             request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
         }
-
         else {
-            int userId = AuthorizedUser.id();
+
             LocalDate date = LocalDate.parse(request.getParameter("date"));
             int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
             userVoteController.save(userId, restaurantId, date);
+            request.setAttribute("dishes", dishController.getAll());
+            request.setAttribute("allVotesForUser", userVoteController.getAllVotesForUser(userId));
+            request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
         }
     }
 
