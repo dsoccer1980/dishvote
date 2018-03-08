@@ -7,6 +7,8 @@ import ru.dsoccer1980.dishvote.repository.RestaurantRepository;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
 import ru.dsoccer1980.dishvote.repository.UserVoteRepository;
 
+import java.time.LocalDate;
+
 
 @Service
 public class UserVoteServiceImpl implements UserVoteService {
@@ -26,7 +28,7 @@ public class UserVoteServiceImpl implements UserVoteService {
 
 
     @Override
-    public UserVote save(Integer userId, Integer restaurantId) {
-        return userVoteRepository.save(userRepository.get(userId), restaurantRepository.get(restaurantId));
+    public UserVote save(Integer userId, Integer restaurantId, LocalDate date) {
+        return userVoteRepository.save(userRepository.get(userId), restaurantRepository.get(restaurantId), date);
     }
 }

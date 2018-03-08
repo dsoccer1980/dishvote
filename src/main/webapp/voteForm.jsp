@@ -9,6 +9,7 @@
 <body>
 <section>
     <form method="post" action="userVote">
+        <input type="date" name="date" value="${date}">
     <table border="1" cellpadding="8" cellspacing="0">
         <c:forEach items="${dishes}" var="entry">
             <tr>
@@ -20,7 +21,6 @@
                     <td>${dish.name}</td>
             </c:forEach>
                 <td> <input type="radio" name="restaurantId" value="${entry.key}"></td>
-                <input type="hidden" name="userId" value="100000">
             </tr>
         </c:forEach>
     </table>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -41,13 +42,17 @@ public class UserVoteServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("chosenDate".equals(action)) {
+            LocalDate date = LocalDate.parse(request.getParameter("date"));
+            request.setAttribute("date", date);
             request.setAttribute("dishes", dishController.getAll());
             request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
         }
+
         else {
-            int userId = Integer.parseInt(request.getParameter("userId"));
+            int userId = AuthorizedUser.id();
+            LocalDate date = LocalDate.parse(request.getParameter("date"));
             int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
-            userVoteController.save(userId, restaurantId);
+            userVoteController.save(userId, restaurantId, date);
         }
     }
 

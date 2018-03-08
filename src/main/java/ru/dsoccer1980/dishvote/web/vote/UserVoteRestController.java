@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import ru.dsoccer1980.dishvote.model.UserVote;
 import ru.dsoccer1980.dishvote.service.UserVoteService;
 
+import java.time.LocalDate;
+
 
 @Controller
 public class UserVoteRestController {
@@ -19,8 +21,8 @@ public class UserVoteRestController {
         this.service = service;
     }
 
-    public UserVote save(Integer userId, Integer restaurantId) {
-        return service.save(userId, restaurantId);
+    public UserVote save(Integer userId, Integer restaurantId, LocalDate date) {
+        return service.save(userId, restaurantId, date);
     }
 
 
