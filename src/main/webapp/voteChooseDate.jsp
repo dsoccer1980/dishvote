@@ -1,3 +1,5 @@
+<%@ page import="java.util.Date" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -15,7 +17,8 @@
     <a href=""></a>           <br>
 
     <form action="userVote?action=chosenDate" method="post">
-        <input type="date"  name="date" required>
+        <c:set var="date" value="<%=LocalDate.now()%>"/>
+        <input type="date"  name="date" required value="${date}">
         <button type="submit">Choose</button>
     </form>
 
