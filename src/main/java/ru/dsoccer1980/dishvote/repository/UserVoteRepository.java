@@ -15,5 +15,7 @@ public interface UserVoteRepository {
 
     List<UserVote> getAllVotesForUser(User user);
 
+    UserVote getUserVote(User user, Restaurant restaurant, LocalDate date);
 
+    boolean isNew(User user);
 }

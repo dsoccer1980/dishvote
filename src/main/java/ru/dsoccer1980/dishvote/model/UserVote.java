@@ -8,10 +8,16 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_vote")
-@NamedQuery(name = UserVote.GET_ALL_USERVOTES, query = "SELECT uv FROM UserVote uv LEFT JOIN FETCH uv.restaurant WHERE uv.user=:user")
+@NamedQueries({
+        @NamedQuery(name = UserVote.GET_ALL_USERVOTES, query = "SELECT uv FROM UserVote uv LEFT JOIN FETCH uv.restaurant WHERE uv.user=:user ORDER BY uv.date"),
+        @NamedQuery(name = UserVote.GET_USERVOTE, query = "SELECT uv FROM UserVote uv WHERE uv.user=:user AND uv.date=:date"),
+        @NamedQuery(name = UserVote.UPDATE_USERVOTE, query = "UPDATE UserVote uv SET uv.restaurant=:restaurant WHERE uv.user=:user AND uv.date=:date")
+})
 public class UserVote extends AbstractBaseEntity {
 
     public static final String GET_ALL_USERVOTES = "UserVote.getAllUserVotes";
+    public static final String GET_USERVOTE = "UserVote.getUserVote";
+    public static final String UPDATE_USERVOTE = "UserVote.updateUserVote";
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)

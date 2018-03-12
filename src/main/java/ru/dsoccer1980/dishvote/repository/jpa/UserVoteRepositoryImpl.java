@@ -8,6 +8,7 @@ import ru.dsoccer1980.dishvote.model.UserVote;
 import ru.dsoccer1980.dishvote.repository.UserVoteRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,8 +24,18 @@ public class UserVoteRepositoryImpl implements UserVoteRepository {
     @Transactional
     public UserVote save(User user, Restaurant restaurant, LocalDate date) {
 
-        UserVote userVote = new UserVote(null, user, restaurant, date);
-        em.persist(userVote);
+        UserVote userVote = getUserVote(user, restaurant, date);
+        if (userVote.isNew()) {
+            em.persist(userVote);
+        }
+        else {
+            em.createNamedQuery(UserVote.UPDATE_USERVOTE)
+                    .setParameter("user", user)
+                    .setParameter("date", date)
+                    .setParameter("restaurant", restaurant)
+                    .executeUpdate();
+        }
+
         return userVote;
     }
 
@@ -33,6 +44,26 @@ public class UserVoteRepositoryImpl implements UserVoteRepository {
         return em.createNamedQuery(UserVote.GET_ALL_USERVOTES, UserVote.class)
                 .setParameter("user", user)
                 .getResultList();
+    }
+
+    @Override
+    public UserVote getUserVote(User user, Restaurant restaurant, LocalDate date) {
+        UserVote userVote;
+        try {
+            userVote = em.createNamedQuery(UserVote.GET_USERVOTE, UserVote.class)
+                    .setParameter("user", user)
+                    .setParameter("date", date)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            userVote = new UserVote(null, user, restaurant, date);
+        }
+
+        return userVote;
+    }
+
+    @Override
+    public boolean isNew(User user) {
+        return user.getId() == null;
     }
 
 }
