@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.dsoccer1980.dishvote.model.UserVote;
 import ru.dsoccer1980.dishvote.service.UserVoteService;
+import ru.dsoccer1980.dishvote.util.VoteException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +24,9 @@ public class UserVoteRestController {
     }
 
     public UserVote save(Integer userId, Integer restaurantId, LocalDate date) {
-        return service.save(userId, restaurantId, date);
+        UserVote userVote = service.save(userId, restaurantId, date);
+        if (userVote == null) throw new VoteException("You can not vote this day more");
+        return userVote;
     }
 
     public List<UserVote> getAllVotesForUser(int userId) {

@@ -3,6 +3,7 @@ package ru.dsoccer1980.dishvote.web;
 import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.dsoccer1980.dishvote.util.VoteException;
 import ru.dsoccer1980.dishvote.web.dish.DishRestController;
 import ru.dsoccer1980.dishvote.web.vote.UserVoteRestController;
 
@@ -55,7 +56,11 @@ public class UserVoteServlet extends HttpServlet {
 
             LocalDate date = LocalDate.parse(request.getParameter("date"));
             int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
-            userVoteController.save(userId, restaurantId, date);
+            try {
+                userVoteController.save(userId, restaurantId, date);
+            } catch (VoteException e) {
+                request.setAttribute("message", e.getMessage());
+            }
             request.setAttribute("dishes", dishController.getAll());
             request.setAttribute("allVotesForUser", userVoteController.getAllVotesForUser(userId));
             request.getRequestDispatcher("/voteForm.jsp").forward(request, response);

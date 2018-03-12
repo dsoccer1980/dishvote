@@ -37,6 +37,8 @@
     </c:forEach>
     </table>
 
+    ${message}
+
 </section>
 </body>
 </html>
