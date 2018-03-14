@@ -12,4 +12,6 @@ public interface RestaurantService {
     void create(Restaurant restaurant);
 
     void update(Restaurant restaurant);
+
+    void delete(int id);
 }

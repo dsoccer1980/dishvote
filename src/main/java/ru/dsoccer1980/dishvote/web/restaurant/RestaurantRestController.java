@@ -35,4 +35,8 @@ public class RestaurantRestController {
     public void update(Restaurant restaurant) {
         service.update(restaurant);
     }
+
+    public void delete(int id) {
+        service.delete(id);
+    }
 }

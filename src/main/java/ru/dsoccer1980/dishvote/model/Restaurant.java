@@ -8,10 +8,14 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "restaurant")
-@NamedQuery(name = Restaurant.GET_ALL_RESTAURANTS, query = "SELECT r FROM Restaurant r")
+@NamedQueries({
+        @NamedQuery(name = Restaurant.GET_ALL_RESTAURANTS, query = "SELECT r FROM Restaurant r"),
+        @NamedQuery(name = Restaurant.DELETE_RESTAURANT, query = "DELETE FROM Restaurant r WHERE r.id=:id")
+})
 public class Restaurant extends AbstractNamedEntity {
 
     public static final String GET_ALL_RESTAURANTS = "Restaurant.getAllRestaurants";
+    public static final String DELETE_RESTAURANT = "Restaurant.deleteRestaurant";
 
     @Column(name = "address", nullable = false)
     @NotBlank

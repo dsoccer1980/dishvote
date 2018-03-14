@@ -38,4 +38,9 @@ public class RestaurantServiceImpl implements RestaurantService {
         repository.save(restaurant);
     }
 
+    @Override
+    public void delete(int id) {
+        repository.delete(id);
+    }
+
 }

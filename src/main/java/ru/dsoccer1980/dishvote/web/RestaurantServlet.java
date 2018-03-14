@@ -74,6 +74,10 @@ public class RestaurantServlet extends HttpServlet {
                 request.setAttribute("restaurant", restaurantController.get(getId(request)));
                 request.getRequestDispatcher("/restaurantForm.jsp").forward(request, response);
                 break;
+            case "delete":
+                restaurantController.delete(getId(request));
+                response.sendRedirect("restaurant");
+                break;
             case "all":
             default:
                 request.setAttribute("restaurants", restaurantController.getAll());

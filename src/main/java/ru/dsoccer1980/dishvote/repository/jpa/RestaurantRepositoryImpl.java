@@ -39,4 +39,12 @@ public class RestaurantRepositoryImpl implements RestaurantRepository{
         return restaurant;
     }
 
+    @Override
+    @Transactional
+    public boolean delete(int id) {
+        return em.createNamedQuery(Restaurant.DELETE_RESTAURANT)
+                .setParameter("id", id)
+                .executeUpdate() != 0;
+    }
+
 }
