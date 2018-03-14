@@ -2,6 +2,7 @@ package ru.dsoccer1980.dishvote.repository.jpa;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.model.Restaurant;
 import ru.dsoccer1980.dishvote.repository.RestaurantRepository;
 

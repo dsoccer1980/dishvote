@@ -10,4 +10,5 @@ public interface DishService {
 
     Map<Integer, List<Dish>> getAll();
 
+    List<Dish> getAllDishByRestaurant(int id);
 }

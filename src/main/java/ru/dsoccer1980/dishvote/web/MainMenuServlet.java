@@ -15,8 +15,8 @@ import java.io.IOException;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class MainUserMenuServlet extends HttpServlet {
-    private static final Logger log = getLogger(MainUserMenuServlet.class);
+public class MainMenuServlet extends HttpServlet {
+    private static final Logger log = getLogger(MainMenuServlet.class);
 
     private ConfigurableApplicationContext springContext;
     private UserRestController userController;
@@ -44,7 +44,7 @@ public class MainUserMenuServlet extends HttpServlet {
             request.getRequestDispatcher("/mainMenuAdmin.jsp").forward(request, response);
         }
         else {
-            request.getRequestDispatcher("/menu.jsp").forward(request, response);
+            request.getRequestDispatcher("/mainMenuUser.jsp").forward(request, response);
         }
     }
 

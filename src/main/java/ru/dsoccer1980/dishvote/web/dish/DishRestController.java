@@ -29,4 +29,8 @@ public class DishRestController {
         return service.getAll();
     }
 
+    public List<Dish> getAllDishByRestaurant(int id) {
+        return service.getAllDishByRestaurant(id);
+    }
+
 }

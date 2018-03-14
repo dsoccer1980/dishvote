@@ -17,6 +17,7 @@
                 <td>${restaurant.address}</td>
                 <td><a href="restaurant?action=update&id=${restaurant.id}">update</a></td>
                 <td><a href="restaurant?action=delete&id=${restaurant.id}">delete</a></td>
+                <td><a href="restaurant?action=dish&id=${restaurant.id}">add/edit menu</a></td>
             </tr>
           </c:forEach>
     </table>

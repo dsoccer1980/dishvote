@@ -3,6 +3,7 @@ package ru.dsoccer1980.dishvote.web;
 import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.model.Restaurant;
 import ru.dsoccer1980.dishvote.web.dish.DishRestController;
 import ru.dsoccer1980.dishvote.web.restaurant.RestaurantRestController;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -77,6 +79,11 @@ public class RestaurantServlet extends HttpServlet {
             case "delete":
                 restaurantController.delete(getId(request));
                 response.sendRedirect("restaurant");
+                break;
+            case "dish":
+                List<Dish> allDishByRestaurant = dishController.getAllDishByRestaurant(getId(request));
+                request.setAttribute("dishes", allDishByRestaurant);
+                request.getRequestDispatcher("/dish.jsp").forward(request, response);
                 break;
             case "all":
             default:

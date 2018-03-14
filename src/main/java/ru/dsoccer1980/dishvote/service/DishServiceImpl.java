@@ -41,4 +41,9 @@ public class DishServiceImpl implements DishService {
         return result;
     }
 
+    @Override
+    public List<Dish> getAllDishByRestaurant(int id) {
+        return repository.getAllDishByRestaurant(id);
+    }
+
 }

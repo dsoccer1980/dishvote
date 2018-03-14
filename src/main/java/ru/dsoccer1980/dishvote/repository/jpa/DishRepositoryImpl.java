@@ -28,4 +28,11 @@ public class DishRepositoryImpl implements DishRepository {
         return em.createNamedQuery(Dish.ALL_DISHES, Dish.class).getResultList();
     }
 
+    @Override
+    public List<Dish> getAllDishByRestaurant(int id) {
+        return em.createNamedQuery(Dish.GET_ALL_DISH_BY_RESTAURANT, Dish.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
+
 }

@@ -9,10 +9,15 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "dish")
-@NamedQuery(name = Dish.ALL_DISHES, query = "SELECT d FROM Dish d LEFT JOIN FETCH d.restaurant")
+@NamedQueries({
+        @NamedQuery(name = Dish.ALL_DISHES, query = "SELECT d FROM Dish d LEFT JOIN FETCH d.restaurant"),
+        @NamedQuery(name = Dish.GET_ALL_DISH_BY_RESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:id")
+})
 public class Dish extends AbstractNamedEntity {
 
     public static final String ALL_DISHES = "Dish.getAll";
+    public static final String GET_ALL_DISH_BY_RESTAURANT = "Dish.getAllDishesByRestaurant";
+
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;
