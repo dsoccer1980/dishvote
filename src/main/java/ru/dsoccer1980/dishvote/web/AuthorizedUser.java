@@ -3,9 +3,9 @@ package ru.dsoccer1980.dishvote.web;
 import ru.dsoccer1980.dishvote.model.AbstractBaseEntity;
 
 public class AuthorizedUser {
-    private static int id = AbstractBaseEntity.START_SEQ;
+    private static int id; //= AbstractBaseEntity.START_SEQ;
 
-    public static int id() {
+    public static int getId() {
         return id;
     }
 

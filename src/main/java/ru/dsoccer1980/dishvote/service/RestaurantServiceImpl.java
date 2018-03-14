@@ -28,10 +28,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public void save(String restaurantName, String restaurantAddress) {
-        Restaurant restaurant = new Restaurant(null, restaurantName, restaurantAddress);
+    public void create(Restaurant restaurant) {
         repository.save(restaurant);
 
+    }
+
+    @Override
+    public void update(Restaurant restaurant) {
+        repository.save(restaurant);
     }
 
 }

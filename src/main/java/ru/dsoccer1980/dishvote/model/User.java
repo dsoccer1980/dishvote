@@ -10,11 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 
-//@NamedQueries({
-//        @NamedQuery(name = User.DELETE, query = "DELETE FROM ru.dsoccer1980.dishvote.model.User u WHERE u.id=:id"),
-//        @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM ru.dsoccer1980.dishvote.model.User u WHERE u.email=?1"),
-//        @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM ru.dsoccer1980.dishvote.model.User u ORDER BY u.name, u.email"),
-//})
 @Entity
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractNamedEntity {
@@ -42,19 +37,24 @@ public class User extends AbstractNamedEntity {
     @NotNull
     private Date registered = new Date();
 
+    @Column(name = "isadmin", nullable = false, columnDefinition = "bool default false")
+    @NotNull
+    private boolean isAdmin = false;
+
     public User() {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled());
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.isAdmin());
     }
 
 
-    public User(Integer id, String name, String email, String password, boolean enabled) {
+    public User(Integer id, String name, String email, String password, boolean enabled, boolean isAdmin) {
         super(id, name);
         this.email = email;
         this.password = password;
         this.enabled = enabled;
+        this.isAdmin = isAdmin;
     }
 
     public String getEmail() {
@@ -87,6 +87,14 @@ public class User extends AbstractNamedEntity {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     @Override

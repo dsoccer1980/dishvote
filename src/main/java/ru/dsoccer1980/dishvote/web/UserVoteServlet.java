@@ -41,7 +41,7 @@ public class UserVoteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        int userId = AuthorizedUser.id();
+        int userId = AuthorizedUser.getId();
 
         if ("chosenDate".equals(action)) {
             LocalDate date = LocalDate.parse(request.getParameter("date"));

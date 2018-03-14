@@ -13,15 +13,19 @@
         <c:forEach items="${restaurants}" var="restaurant">
             <jsp:useBean id="restaurant" scope="page" type="ru.dsoccer1980.dishvote.model.Restaurant"/>
             <tr>
-               <td>${restaurant.id}</td>
                 <td>${restaurant.name}</td>
+                <td>${restaurant.address}</td>
+                <td><a href="restaurant?action=update&id=${restaurant.id}">update</a></td>
+                <td><a href="restaurant?action=delete&id=${restaurant.id}">delete</a></td>
             </tr>
           </c:forEach>
     </table>
 
+    <br>
+    Добавить новый ресторан
     <form action="restaurant" method="post">
-        <input type="text" name="name">
-        <input type="text" name="address">
+        Название<input type="text" name="name"> <br>
+        Адрес <input type="text" name="address"> <br>
         <input type="submit" name="submit" value="submit">
     </form>
 </section>

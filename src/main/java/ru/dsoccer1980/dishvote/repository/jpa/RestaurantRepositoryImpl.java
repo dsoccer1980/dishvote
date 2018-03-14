@@ -30,7 +30,12 @@ public class RestaurantRepositoryImpl implements RestaurantRepository{
     @Override
     @Transactional
     public Restaurant save(Restaurant restaurant) {
-        em.persist(restaurant);
+        if (restaurant.isNew()) {
+            em.persist(restaurant);
+        }
+        else {
+            em.merge(restaurant);
+        }
         return restaurant;
     }
 

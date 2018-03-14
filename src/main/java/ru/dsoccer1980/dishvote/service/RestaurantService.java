@@ -9,5 +9,7 @@ public interface RestaurantService {
 
     List<Restaurant> getAll();
 
-    void save(String restaurantName, String restaurantAddress);
+    void create(Restaurant restaurant);
+
+    void update(Restaurant restaurant);
 }
