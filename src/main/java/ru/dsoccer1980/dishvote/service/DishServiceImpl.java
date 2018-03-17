@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.repository.DishRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,18 +28,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public Map<Integer, List<Dish>> getAll() {
-        Map<Integer, List<Dish>> result = new HashMap<>();
-        for (Dish dish : repository.getAll()) {
-            Integer restaurantId = dish.getRestaurant().getId();
-            if (result.containsKey(restaurantId)) {
-                result.get(restaurantId).add(dish);
-            } else {
-                List<Dish> dishes =new ArrayList<>();
-                dishes.add(dish);
-                result.put(restaurantId, dishes);
-            }
-        }
-        return result;
+        return createMapFromDish(repository.getAll());
     }
 
     @Override
@@ -59,6 +49,26 @@ public class DishServiceImpl implements DishService {
     @Override
     public void update(Dish dish) {
         repository.save(dish);
+    }
+
+    @Override
+    public Map<Integer, List<Dish>> getDishOnDate(LocalDate date) {
+        return createMapFromDish(repository.getDishOnDate(date));
+    }
+
+    private Map<Integer, List<Dish>> createMapFromDish(List<Dish> dishList) {
+        Map<Integer, List<Dish>> result = new HashMap<>();
+        for (Dish dish : dishList) {
+            Integer restaurantId = dish.getRestaurant().getId();
+            if (result.containsKey(restaurantId)) {
+                result.get(restaurantId).add(dish);
+            } else {
+                List<Dish> dishes =new ArrayList<>();
+                dishes.add(dish);
+                result.put(restaurantId, dishes);
+            }
+        }
+        return result;
     }
 
 }

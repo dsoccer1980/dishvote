@@ -47,7 +47,7 @@ public class UserVoteServlet extends HttpServlet {
             LocalDate date = LocalDate.parse(request.getParameter("date"));
 
             request.setAttribute("date", date);
-            request.setAttribute("dishes", dishController.getAll());
+            request.setAttribute("dishes", dishController.getDishOnDate(date));
             request.setAttribute("allVotesForUser", userVoteController.getAllVotesForUser(userId));
 
             request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
@@ -61,11 +61,22 @@ public class UserVoteServlet extends HttpServlet {
             } catch (VoteException e) {
                 request.setAttribute("message", e.getMessage());
             }
-            request.setAttribute("dishes", dishController.getAll());
+            request.setAttribute("dishes", dishController.getDishOnDate(date));
             request.setAttribute("allVotesForUser", userVoteController.getAllVotesForUser(userId));
+            request.setAttribute("date", date);
             request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        LocalDate date = LocalDate.now();
+        int userId = AuthorizedUser.getId();
 
+        request.setAttribute("date", date);
+        request.setAttribute("dishes", dishController.getDishOnDate(date));
+        request.setAttribute("allVotesForUser", userVoteController.getAllVotesForUser(userId));
+
+        request.getRequestDispatcher("/voteForm.jsp").forward(request, response);
+    }
 }

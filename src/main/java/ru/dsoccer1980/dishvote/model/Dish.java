@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "dish")
 @NamedQueries({
         @NamedQuery(name = Dish.ALL_DISHES, query = "SELECT d FROM Dish d LEFT JOIN FETCH d.restaurant"),
+        @NamedQuery(name = Dish.GET_DISH_ON_DATE, query = "SELECT d FROM Dish d WHERE d.date=:date"),
         @NamedQuery(name = Dish.GET_ALL_DISH_BY_RESTAURANT, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:id"),
         @NamedQuery(name = Dish.DELETE_DISH, query = "DELETE FROM Dish r WHERE r.id=:id")
 })
@@ -18,6 +19,7 @@ public class Dish extends AbstractNamedEntity {
 
     public static final String ALL_DISHES = "Dish.getAll";
     public static final String GET_ALL_DISH_BY_RESTAURANT = "Dish.getAllDishesByRestaurant";
+    public static final String GET_DISH_ON_DATE = "Dish.getDishOnDate";
     public static final String DELETE_DISH = "Dish.deleteDish";
 
 

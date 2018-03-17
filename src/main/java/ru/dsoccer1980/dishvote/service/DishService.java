@@ -2,6 +2,7 @@ package ru.dsoccer1980.dishvote.service;
 
 import ru.dsoccer1980.dishvote.model.Dish;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +18,6 @@ public interface DishService {
     boolean delete(int dishId);
 
     void update(Dish dish);
+
+    Map<Integer, List<Dish>> getDishOnDate(LocalDate date);
 }

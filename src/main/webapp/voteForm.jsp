@@ -8,8 +8,14 @@
 </head>
 <body>
 <section>
+
+    <form method="post" action="userVote?action=chosenDate">
+        <input type="date" name="date" value="${date}" >
+        <input type="submit" name="submit">
+    </form>
+
     <form method="post" action="userVote">
-        <input type="date" name="date" value="${date}">
+        <input type="hidden" name="date" value="${date}">
     <table border="1" cellpadding="8" cellspacing="0">
         <c:forEach items="${dishes}" var="entry">
             <tr>
@@ -27,6 +33,7 @@
         <input type="submit" name="submit">
     </form>
 
+    Your previous votes: <br>
     <table border="1" cellpadding="8" cellspacing="0">
     <c:forEach items="${allVotesForUser}" var="userVote">
         <jsp:useBean id="userVote" scope="page" type="ru.dsoccer1980.dishvote.model.UserVote"/>

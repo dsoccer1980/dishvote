@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.service.DishService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -43,5 +44,9 @@ public class DishRestController {
 
     public void update(Dish dish) {
         service.update(dish);
+    }
+
+    public Map<Integer, List<Dish>> getDishOnDate(LocalDate date) {
+        return service.getDishOnDate(date);
     }
 }

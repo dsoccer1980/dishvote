@@ -7,6 +7,7 @@ import ru.dsoccer1980.dishvote.repository.DishRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -52,6 +53,13 @@ public class DishRepositoryImpl implements DishRepository {
         return em.createNamedQuery(Dish.DELETE_DISH)
                 .setParameter("id", dishId)
                 .executeUpdate() != 0;
+    }
+
+    @Override
+    public List<Dish> getDishOnDate(LocalDate date) {
+        return em.createNamedQuery(Dish.GET_DISH_ON_DATE, Dish.class)
+                .setParameter("date", date)
+                .getResultList();
     }
 
 }

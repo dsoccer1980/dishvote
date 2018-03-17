@@ -13,7 +13,7 @@
     Hello <c:out value="${userName.name}"/>  <br>
 
     <a href="">profile</a>    <br>
-    <a href="voteChooseDate.jsp">vote</a>       <br>
+    <a href="userVote">vote</a>       <br>
     <a href=""></a>           <br>
 
 
