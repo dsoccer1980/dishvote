@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class RestaurantServlet extends HttpServlet {
-    private static final Logger log = getLogger(RestaurantServlet.class);
+public class DishServlet extends HttpServlet {
+    private static final Logger log = getLogger(DishServlet.class);
 
     private ConfigurableApplicationContext springContext;
     private RestaurantRestController restaurantController;
@@ -57,23 +58,23 @@ public class RestaurantServlet extends HttpServlet {
 
             }
         }
-        else if (action.equals("addRestaurant")) {
-                restaurantController.create(restaurant);
-                response.sendRedirect("restaurant");
-            }
-        else if (action.equals("editRestaurant")){
-                int restaurantId = Integer.parseInt(request.getParameter("id"));
+        else if (action.equals("addDish")) {
+            String dishName = request.getParameter("name");
+            BigDecimal price = new BigDecimal(request.getParameter("price"));
+            int restaurantId = Integer.parseInt(request.getParameter("restaurant_id"));
+            restaurant = restaurantController.get(restaurantId);
+            LocalDate date = LocalDate.parse(request.getParameter("date"));
+            Dish dish = new Dish(null, dishName, price, restaurant, date);
 
-                restaurant.setId(restaurantId);
-                restaurantController.update(restaurant);
-                response.sendRedirect("restaurant");
+            dishController.create(dish);
+            response.sendRedirect("/restaurant?action=dish&id=" + restaurantId);
         }
 
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("forward to restaurant");
+        log.debug("forward to restaurant");  //TODO log
         String action = request.getParameter("action");
         switch (action == null ? "all" : action) {
             case "create":
@@ -82,19 +83,14 @@ public class RestaurantServlet extends HttpServlet {
                 request.getRequestDispatcher("/restaurantForm.jsp").forward(request, response);
                 break;
             case "delete":
-                restaurantController.delete(getId(request));
-                response.sendRedirect("restaurant");
+                int dishId = getId(request);
+                int restaurantId = dishController.get(dishId).getRestaurant().getId();
+                dishController.delete(dishId);
+                request.getRequestDispatcher("/restaurant?action=dish&id=" + restaurantId).forward(request, response);
                 break;
-            case "dish":
-                List<Dish> allDishByRestaurant = dishController.getAllDishByRestaurant(getId(request));
-                request.setAttribute("dishes", allDishByRestaurant);
-                request.setAttribute("restaurant", getId(request));
-                request.getRequestDispatcher("/dish.jsp").forward(request, response);
-                break;
-            case "all":
+            case "all": //TODO
             default:
-                request.setAttribute("restaurants", restaurantController.getAll());
-                request.getRequestDispatcher("/restaurant.jsp").forward(request, response);
+               // request.getRequestDispatcher("/restaurant?action=dish&id=" + getId(request)).forward(request, response);
         }
     }
 

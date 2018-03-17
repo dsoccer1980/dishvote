@@ -1,8 +1,10 @@
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Dish</title>
 
 </head>
@@ -25,6 +27,15 @@
 
     <br>
 
+    Add new dish
+    <form action="dish?action=addDish" method="post">
+        <input type="hidden" name="restaurant_id" value="${restaurant}">
+        <c:set var="date" value="<%=LocalDate.now()%>"/>
+        Data <input type="date"  name="date" required value="${date}"> <br>
+        Name<input type="text" name="name"> <br>
+        Price <input type="text" name="price"> <br>
+        <input type="submit" name="submit" value="submit">
+    </form>
 </section>
 </body>
 </html>

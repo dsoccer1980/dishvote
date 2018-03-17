@@ -24,7 +24,7 @@
 
     <br>
     Добавить новый ресторан
-    <form action="restaurant" method="post">
+    <form action="restaurant?action=addRestaurant" method="post">
         Название<input type="text" name="name"> <br>
         Адрес <input type="text" name="address"> <br>
         <input type="submit" name="submit" value="submit">

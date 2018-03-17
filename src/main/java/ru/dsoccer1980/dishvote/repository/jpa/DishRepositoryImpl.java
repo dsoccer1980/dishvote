@@ -35,4 +35,23 @@ public class DishRepositoryImpl implements DishRepository {
                 .getResultList();
     }
 
+    @Override
+    @Transactional
+    public void save(Dish dish) {
+        if (dish.isNew()) {
+            em.persist(dish);
+        }
+        else {
+            em.merge(dish);
+        }
+    }
+
+    @Override
+    @Transactional
+    public boolean delete(int dishId) {
+        return em.createNamedQuery(Dish.DELETE_DISH)
+                .setParameter("id", dishId)
+                .executeUpdate() != 0;
+    }
+
 }

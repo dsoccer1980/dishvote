@@ -46,4 +46,14 @@ public class DishServiceImpl implements DishService {
         return repository.getAllDishByRestaurant(id);
     }
 
+    @Override
+    public void create(Dish dish) {
+        repository.save(dish);
+    }
+
+    @Override
+    public boolean delete(int dishId) {
+        return repository.delete(dishId);
+    }
+
 }

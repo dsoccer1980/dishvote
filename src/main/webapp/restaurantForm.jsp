@@ -12,7 +12,7 @@
     <h2>Edit restaurant</h2>
     <hr>
     <jsp:useBean id="restaurant" type="ru.dsoccer1980.dishvote.model.Restaurant" scope="request"/>
-    <form method="post" action="restaurant">
+    <form action="restaurant?action=editRestaurant" method="post">
         <input type="hidden" name="id" value="${restaurant.id}">
         <dl>
             <dt>Name:</dt>

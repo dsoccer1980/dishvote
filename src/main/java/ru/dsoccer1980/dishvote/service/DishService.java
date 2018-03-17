@@ -11,4 +11,8 @@ public interface DishService {
     Map<Integer, List<Dish>> getAll();
 
     List<Dish> getAllDishByRestaurant(int id);
+
+    void create(Dish dish);
+
+    boolean delete(int dishId);
 }

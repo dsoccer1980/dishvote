@@ -33,4 +33,11 @@ public class DishRestController {
         return service.getAllDishByRestaurant(id);
     }
 
+    public void create(Dish dish) {
+        service.create(dish);
+    }
+
+    public boolean delete(int dishId) {
+        return service.delete(dishId);
+    }
 }

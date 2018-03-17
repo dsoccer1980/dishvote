@@ -21,6 +21,11 @@
         <servlet-class>ru.dsoccer1980.dishvote.web.MainMenuServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>dishServlet</servlet-name>
+        <servlet-class>ru.dsoccer1980.dishvote.web.DishServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>restaurantServlet</servlet-name>
         <url-pattern>/restaurant</url-pattern>
@@ -32,6 +37,10 @@
     <servlet-mapping>
         <servlet-name>menuServlet</servlet-name>
         <url-pattern>/menu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dishServlet</servlet-name>
+        <url-pattern>/dish</url-pattern>
     </servlet-mapping>
 
 
