@@ -15,4 +15,6 @@ public interface DishService {
     void create(Dish dish);
 
     boolean delete(int dishId);
+
+    void update(Dish dish);
 }

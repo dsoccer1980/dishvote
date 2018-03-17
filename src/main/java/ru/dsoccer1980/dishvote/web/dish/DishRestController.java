@@ -40,4 +40,8 @@ public class DishRestController {
     public boolean delete(int dishId) {
         return service.delete(dishId);
     }
+
+    public void update(Dish dish) {
+        service.update(dish);
+    }
 }

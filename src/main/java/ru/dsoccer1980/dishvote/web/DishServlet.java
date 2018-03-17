@@ -46,11 +46,6 @@ public class DishServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String action = request.getParameter("action");
-        String restaurantName = request.getParameter("name");
-        String restaurantAddress = request.getParameter("address");
-        Restaurant restaurant = new Restaurant(restaurantName, restaurantAddress);
-
-
 
         if (action == null) {
             //TODO
@@ -58,15 +53,21 @@ public class DishServlet extends HttpServlet {
 
             }
         }
-        else if (action.equals("addDish")) {
+        else if (action.equals("addDish") || (action.equals("editDish"))) {
+            Integer dishId = action.equals("addDish")? null: Integer.parseInt(request.getParameter("id"));
             String dishName = request.getParameter("name");
             BigDecimal price = new BigDecimal(request.getParameter("price"));
             int restaurantId = Integer.parseInt(request.getParameter("restaurant_id"));
-            restaurant = restaurantController.get(restaurantId);
+            Restaurant restaurant = restaurantController.get(restaurantId);
             LocalDate date = LocalDate.parse(request.getParameter("date"));
-            Dish dish = new Dish(null, dishName, price, restaurant, date);
+            Dish dish = new Dish(dishId, dishName, price, restaurant, date);
 
-            dishController.create(dish);
+            if (action.equals("addDish")) {
+                dishController.create(dish);
+            }
+            else {
+                dishController.update(dish);
+            }
             response.sendRedirect("/restaurant?action=dish&id=" + restaurantId);
         }
 
@@ -77,10 +78,9 @@ public class DishServlet extends HttpServlet {
         log.debug("forward to restaurant");  //TODO log
         String action = request.getParameter("action");
         switch (action == null ? "all" : action) {
-            case "create":
             case "update":
-                request.setAttribute("restaurant", restaurantController.get(getId(request)));
-                request.getRequestDispatcher("/restaurantForm.jsp").forward(request, response);
+                request.setAttribute("dish", dishController.get(getId(request)));
+                request.getRequestDispatcher("/dishForm.jsp").forward(request, response);
                 break;
             case "delete":
                 int dishId = getId(request);
