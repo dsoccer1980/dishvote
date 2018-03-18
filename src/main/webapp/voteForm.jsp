@@ -24,7 +24,7 @@
                 <c:if test = "${loopCount.count == 1}" >
                     <td>${dish.restaurant.name}</td>
                 </c:if>
-                    <td>${dish.name}</td>
+                    <td>${dish.name} (${dish.price})</td>
             </c:forEach>
                 <td> <input type="radio" name="restaurantId" value="${entry.key}"></td>
             </tr>
