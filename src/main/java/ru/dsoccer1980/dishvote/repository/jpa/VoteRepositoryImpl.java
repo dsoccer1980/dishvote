@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.dsoccer1980.dishvote.model.Restaurant;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.model.UserVote;
-import ru.dsoccer1980.dishvote.repository.UserVoteRepository;
+import ru.dsoccer1980.dishvote.repository.VoteRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class UserVoteRepositoryImpl implements UserVoteRepository {
+public class VoteRepositoryImpl implements VoteRepository {
 
     @PersistenceContext
     private EntityManager em;
@@ -64,6 +64,13 @@ public class UserVoteRepositoryImpl implements UserVoteRepository {
     @Override
     public boolean isNew(User user) {
         return user.getId() == null;
+    }
+
+    @Override
+    public List<Object[]> getVotesForDate(LocalDate date) {
+        return em.createNamedQuery(UserVote.GET_VOTES_FOR_DATE, Object[].class)
+                .setParameter("date", date)
+                .getResultList();
     }
 
 }

@@ -14,7 +14,7 @@ Admin panel <br><br>
 
     <a href="">profile</a>    <br>
     <a href="restaurant">show restaurants</a>       <br>
-    <a href=""></a>           <br>
+    <a href="adminVote">show votes</a>           <br>
 
 
 </section>

@@ -9,15 +9,17 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "user_vote")
 @NamedQueries({
-        @NamedQuery(name = UserVote.GET_ALL_USERVOTES, query = "SELECT uv FROM UserVote uv LEFT JOIN FETCH uv.restaurant WHERE uv.user=:user ORDER BY uv.date"),
+        @NamedQuery(name = UserVote.GET_ALL_USERVOTES, query = "SELECT uv FROM UserVote uv LEFT JOIN FETCH uv.restaurant WHERE uv.user=:user ORDER BY uv.date DESC"),
         @NamedQuery(name = UserVote.GET_USERVOTE, query = "SELECT uv FROM UserVote uv WHERE uv.user=:user AND uv.date=:date"),
-        @NamedQuery(name = UserVote.UPDATE_USERVOTE, query = "UPDATE UserVote uv SET uv.restaurant=:restaurant WHERE uv.user=:user AND uv.date=:date")
+        @NamedQuery(name = UserVote.UPDATE_USERVOTE, query = "UPDATE UserVote uv SET uv.restaurant=:restaurant WHERE uv.user=:user AND uv.date=:date"),
+        @NamedQuery(name = UserVote.GET_VOTES_FOR_DATE, query = "SELECT count(uv.restaurant), uv.restaurant.id FROM UserVote uv WHERE uv.date=:date GROUP BY uv.restaurant.id ORDER by count(uv.restaurant) DESC"),
 })
 public class UserVote extends AbstractBaseEntity {
 
     public static final String GET_ALL_USERVOTES = "UserVote.getAllUserVotes";
     public static final String GET_USERVOTE = "UserVote.getUserVote";
     public static final String UPDATE_USERVOTE = "UserVote.updateUserVote";
+    public static final String GET_VOTES_FOR_DATE = "UserVote.getVotesForDate";
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)

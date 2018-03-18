@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public interface UserVoteRepository {
+public interface VoteRepository {
 
     UserVote save(User user, Restaurant restaurant, LocalDate date);
 
@@ -18,4 +18,6 @@ public interface UserVoteRepository {
     UserVote getUserVote(User user, Restaurant restaurant, LocalDate date);
 
     boolean isNew(User user);
+
+    List<Object[]> getVotesForDate(LocalDate date);
 }

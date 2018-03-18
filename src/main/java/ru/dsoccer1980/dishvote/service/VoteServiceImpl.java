@@ -2,32 +2,35 @@ package ru.dsoccer1980.dishvote.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.dsoccer1980.dishvote.model.Restaurant;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.model.UserVote;
 import ru.dsoccer1980.dishvote.repository.RestaurantRepository;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
-import ru.dsoccer1980.dishvote.repository.UserVoteRepository;
+import ru.dsoccer1980.dishvote.repository.VoteRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
-public class UserVoteServiceImpl implements UserVoteService {
+public class VoteServiceImpl implements VoteService {
 
     private final LocalTime DEADLINE = LocalTime.of(11, 0);
 
-    private final UserVoteRepository userVoteRepository;
+    private final VoteRepository voteRepository;
     private final UserRepository userRepository;
     private final RestaurantRepository restaurantRepository;
 
     @Autowired
-    public UserVoteServiceImpl(UserVoteRepository userVoteRepository,
-                               UserRepository userRepository,
-                               RestaurantRepository restaurantRepository) {
-        this.userVoteRepository = userVoteRepository;
+    public VoteServiceImpl(VoteRepository voteRepository,
+                           UserRepository userRepository,
+                           RestaurantRepository restaurantRepository) {
+        this.voteRepository = voteRepository;
         this.userRepository = userRepository;
         this.restaurantRepository = restaurantRepository;
     }
@@ -36,7 +39,7 @@ public class UserVoteServiceImpl implements UserVoteService {
     @Override
     public UserVote save(Integer userId, Integer restaurantId, LocalDate date) {
         if (canVote(date)) {
-            return userVoteRepository.save(userRepository.get(userId), restaurantRepository.get(restaurantId), date);
+            return voteRepository.save(userRepository.get(userId), restaurantRepository.get(restaurantId), date);
         }
         else {
             return null;
@@ -46,7 +49,18 @@ public class UserVoteServiceImpl implements UserVoteService {
     @Override
     public List<UserVote> getAllVotesForUser(int userId) {
         User user = userRepository.get(userId);
-        return userVoteRepository.getAllVotesForUser(user);
+        return voteRepository.getAllVotesForUser(user);
+    }
+
+    @Override
+    public Map<Restaurant, Long> getAllVotesForDate(LocalDate date) {
+        List<Object[]> votesForDate = voteRepository.getVotesForDate(date);
+        Map<Restaurant, Long> result = new HashMap<>();
+        for (Object[] vote : votesForDate) {
+            result.put(restaurantRepository.get((Integer)vote[1]), Long.parseLong(vote[0].toString()));
+        }
+
+        return result;
     }
 
     private boolean canVote(LocalDate date) {

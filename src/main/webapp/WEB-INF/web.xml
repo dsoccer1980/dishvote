@@ -17,6 +17,11 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet>
+        <servlet-name>adminVoteServlet</servlet-name>
+        <servlet-class>ru.dsoccer1980.dishvote.web.AdminVoteServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet>
         <servlet-name>menuServlet</servlet-name>
         <servlet-class>ru.dsoccer1980.dishvote.web.MainMenuServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
@@ -33,6 +38,10 @@
     <servlet-mapping>
         <servlet-name>userVoteServlet</servlet-name>
         <url-pattern>/userVote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminVoteServlet</servlet-name>
+        <url-pattern>/adminVote</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>menuServlet</servlet-name>

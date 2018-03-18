@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.dsoccer1980.dishvote.model.UserVote;
-import ru.dsoccer1980.dishvote.service.UserVoteService;
+import ru.dsoccer1980.dishvote.service.VoteService;
 import ru.dsoccer1980.dishvote.util.VoteException;
 
 import java.time.LocalDate;
@@ -16,10 +16,10 @@ import java.util.List;
 public class UserVoteRestController {
     private static final Logger log = LoggerFactory.getLogger(UserVoteRestController.class);
 
-    private final UserVoteService service;
+    private final VoteService service;
 
     @Autowired
-    public UserVoteRestController(UserVoteService service) {
+    public UserVoteRestController(VoteService service) {
         this.service = service;
     }
 
