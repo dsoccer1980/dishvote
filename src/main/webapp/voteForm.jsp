@@ -10,8 +10,8 @@
 <section>
 
     <form method="post" action="userVote?action=chosenDate">
-        <input type="date" name="date" value="${date}" >
-        <input type="submit" name="submit">
+        <input type="date" name="date" value="${date}" onchange="document.getElementById('submitButton').click();">
+        <input type="submit" name="submit" id="submitButton" hidden>
     </form>
 
     <form method="post" action="userVote">
