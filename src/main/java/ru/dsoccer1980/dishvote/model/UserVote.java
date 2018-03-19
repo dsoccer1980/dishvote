@@ -12,7 +12,7 @@ import java.time.LocalDate;
         @NamedQuery(name = UserVote.GET_ALL_USERVOTES, query = "SELECT uv FROM UserVote uv LEFT JOIN FETCH uv.restaurant WHERE uv.user=:user ORDER BY uv.date DESC"),
         @NamedQuery(name = UserVote.GET_USERVOTE, query = "SELECT uv FROM UserVote uv WHERE uv.user=:user AND uv.date=:date"),
         @NamedQuery(name = UserVote.UPDATE_USERVOTE, query = "UPDATE UserVote uv SET uv.restaurant=:restaurant WHERE uv.user=:user AND uv.date=:date"),
-        @NamedQuery(name = UserVote.GET_VOTES_FOR_DATE, query = "SELECT count(uv.restaurant), uv.restaurant.id FROM UserVote uv WHERE uv.date=:date GROUP BY uv.restaurant.id ORDER by count(uv.restaurant) DESC"),
+        @NamedQuery(name = UserVote.GET_VOTES_FOR_DATE, query = "SELECT count(uv.restaurant.id), r.id, r.name FROM Restaurant r LEFT JOIN UserVote uv ON r.id=uv.restaurant.id AND uv.date=:date GROUP BY uv.restaurant.id, r.id ORDER BY count(uv.restaurant.id) DESC, r.name"),
 })
 public class UserVote extends AbstractBaseEntity {
 

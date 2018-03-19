@@ -12,7 +12,7 @@ import ru.dsoccer1980.dishvote.repository.VoteRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +55,7 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public Map<Restaurant, Long> getAllVotesForDate(LocalDate date) {
         List<Object[]> votesForDate = voteRepository.getVotesForDate(date);
-        Map<Restaurant, Long> result = new HashMap<>();
+        Map<Restaurant, Long> result = new LinkedHashMap<>();
         for (Object[] vote : votesForDate) {
             result.put(restaurantRepository.get((Integer)vote[1]), Long.parseLong(vote[0].toString()));
         }
