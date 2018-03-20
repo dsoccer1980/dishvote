@@ -22,5 +22,16 @@ public class UserRepositoryImpl implements UserRepository {
         return user;
     }
 
+    @Override
+    @Transactional
+    public void save(User user) {
+        if (user.isNew()) {
+            em.persist(user);
+        }
+        else {
+            em.merge(user);
+        }
+    }
+
 
 }

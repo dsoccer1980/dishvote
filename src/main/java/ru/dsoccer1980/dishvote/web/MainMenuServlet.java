@@ -39,7 +39,7 @@ public class MainMenuServlet extends HttpServlet {
         int userId = Integer.parseInt(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
         User user = userController.get(userId);
-        request.setAttribute("userName", user);
+        request.setAttribute("user", user);
         if (user.isAdmin()) {
             request.getRequestDispatcher("/mainMenuAdmin.jsp").forward(request, response);
         }

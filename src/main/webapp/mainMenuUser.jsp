@@ -10,9 +10,9 @@
 <section>
 
 
-    Hello <c:out value="${userName.name}"/>  <br>
+    Hello <c:out value="${user.name}"/>  <br>
 
-    <a href="">profile</a>    <br>
+    <a href="user">profile</a>    <br>
     <a href="userVote">vote</a>       <br>
     <a href=""></a>           <br>
 

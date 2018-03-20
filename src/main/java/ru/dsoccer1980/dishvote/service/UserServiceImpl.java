@@ -20,4 +20,9 @@ public class UserServiceImpl implements UserService {
     public User get(int id) {
         return repository.get(id);
     }
+
+    @Override
+    public void update(User user) {
+        repository.save(user);
+    }
 }

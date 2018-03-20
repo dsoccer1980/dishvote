@@ -14,10 +14,6 @@ import java.util.Date;
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractNamedEntity {
 
-    public static final String DELETE = "User.delete";
-    public static final String BY_EMAIL = "User.getByEmail";
-    public static final String ALL_SORTED = "User.getAllSorted";
-
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
@@ -45,14 +41,15 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.isAdmin());
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.registered, u.isEnabled(), u.isAdmin());
     }
 
 
-    public User(Integer id, String name, String email, String password, boolean enabled, boolean isAdmin) {
+    public User(Integer id, String name, String email, String password, Date registered, boolean enabled, boolean isAdmin) {
         super(id, name);
         this.email = email;
         this.password = password;
+        this.registered = registered;
         this.enabled = enabled;
         this.isAdmin = isAdmin;
     }

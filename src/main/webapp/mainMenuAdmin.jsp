@@ -10,7 +10,7 @@
 <section>
 Admin panel <br><br>
 
-    Hello <c:out value="${userName.name}"/>  <br>
+    Hello <c:out value="${user.name}"/>  <br>
 
     <a href="">profile</a>    <br>
     <a href="restaurant">show restaurants</a>       <br>

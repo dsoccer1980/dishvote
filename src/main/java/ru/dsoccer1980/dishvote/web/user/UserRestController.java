@@ -23,5 +23,7 @@ public class UserRestController {
         return service.get(id);
     }
 
-
+    public void update(User user) {
+        service.update(user);
+    }
 }

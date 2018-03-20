@@ -8,5 +8,5 @@ public interface UserRepository {
 
     User get(int id);
 
-
+    void save(User user);
 }
