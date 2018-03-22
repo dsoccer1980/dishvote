@@ -1,6 +1,5 @@
 package ru.dsoccer1980.dishvote.web;
 
-import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.dsoccer1980.dishvote.model.Dish;
@@ -17,10 +16,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import static org.slf4j.LoggerFactory.getLogger;
 
 public class RestaurantServlet extends HttpServlet {
-    private static final Logger log = getLogger(RestaurantServlet.class);
 
     private ConfigurableApplicationContext springContext;
     private RestaurantRestController restaurantController;
@@ -73,7 +70,6 @@ public class RestaurantServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("forward to restaurant");
         String action = request.getParameter("action");
         switch (action == null ? "all" : action) {
             case "create":

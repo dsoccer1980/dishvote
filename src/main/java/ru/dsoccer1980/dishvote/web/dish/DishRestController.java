@@ -23,30 +23,37 @@ public class DishRestController {
     }
 
     public Dish get(int id) {
+        log.info("get Dish(id):  {}", id);
         return service.get(id);
     }
 
     public Map<Integer, List<Dish>> getAll() {
+        log.info("get all dish");
         return service.getAll();
     }
 
     public List<Dish> getAllDishByRestaurant(int id) {
+        log.info("get Dish by restaurant(id):  {}", id);
         return service.getAllDishByRestaurant(id);
     }
 
     public void create(Dish dish) {
+        log.info("create dish:  {}", dish);
         service.create(dish);
     }
 
     public boolean delete(int dishId) {
+        log.info("delete Dish(id):  {}", dishId);
         return service.delete(dishId);
     }
 
     public void update(Dish dish) {
+        log.info("update Dish:  {}", dish);
         service.update(dish);
     }
 
     public Map<Integer, List<Dish>> getDishOnDate(LocalDate date) {
+        log.info("get Dish on date:  {}", date);
         return service.getDishOnDate(date);
     }
 }

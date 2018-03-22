@@ -26,10 +26,12 @@ public class AdminVoteRestController {
 
 
     public Map<Restaurant, Long> getAllVotesForDate(LocalDate date) {
+        log.info("get all votes for date:  {}", date);
         return service.getAllVotesForDate(date);
     }
 
     public List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date) {
+        log.info("get votes of users by restaurant: {} and date: {}", restaurantId, date);
         return service.getVotesOfUsersByRestaurantAndDate(restaurantId, date);
     }
 }

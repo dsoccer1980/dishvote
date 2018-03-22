@@ -22,22 +22,27 @@ public class UserRestController {
     }
 
     public User get(int id) {
+        log.info("get user:  {}", id);
         return service.get(id);
     }
 
     public void update(User user) {
+        log.info("update user:  {}", user);
         service.update(user);
     }
 
     public List<User> getAll() {
+        log.info("get all users:");
         return service.getAll();
     }
 
     public void create(User user) {
+        log.info("create user:  {}", user);
         service.create(user);
     }
 
     public boolean delete(int id) {
+        log.info("delete user:  {}", id);
         return service.delete(id);
     }
 }

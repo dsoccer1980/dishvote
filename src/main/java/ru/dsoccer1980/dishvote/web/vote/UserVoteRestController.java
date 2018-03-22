@@ -24,12 +24,14 @@ public class UserVoteRestController {
     }
 
     public UserVote save(Integer userId, Integer restaurantId, LocalDate date) {
+        log.info("save uservote(userId, restaurantId, date) :  {}, {}, {}", userId, restaurantId, date);
         UserVote userVote = service.save(userId, restaurantId, date);
         if (userVote == null) throw new VoteException("You can not vote this day more");
         return userVote;
     }
 
     public List<UserVote> getAllVotesForUser(int userId) {
+        log.info("get all votes for user:  {}", userId);
         return service.getAllVotesForUser(userId);
     }
 

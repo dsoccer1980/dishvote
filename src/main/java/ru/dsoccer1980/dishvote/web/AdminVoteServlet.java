@@ -1,6 +1,5 @@
 package ru.dsoccer1980.dishvote.web;
 
-import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.dsoccer1980.dishvote.model.Restaurant;
@@ -17,10 +16,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-import static org.slf4j.LoggerFactory.getLogger;
 
 public class AdminVoteServlet extends HttpServlet {
-    private static final Logger log = getLogger(AdminVoteServlet.class);
 
     private ConfigurableApplicationContext springContext;
     private AdminVoteRestController voteController;

@@ -1,6 +1,5 @@
 package ru.dsoccer1980.dishvote.web;
 
-import org.slf4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.dsoccer1980.dishvote.model.User;
@@ -15,10 +14,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import static org.slf4j.LoggerFactory.getLogger;
 
 public class AdminServlet extends HttpServlet {
-    private static final Logger log = getLogger(AdminServlet.class);
 
     private ConfigurableApplicationContext springContext;
     private UserRestController userController;
