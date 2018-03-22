@@ -10,14 +10,16 @@ import java.time.LocalDate;
 @Table(name = "user_vote")
 @NamedQueries({
         @NamedQuery(name = UserVote.GET_ALL_USERVOTES, query = "SELECT uv FROM UserVote uv LEFT JOIN FETCH uv.restaurant WHERE uv.user=:user ORDER BY uv.date DESC"),
-        @NamedQuery(name = UserVote.GET_USERVOTE, query = "SELECT uv FROM UserVote uv WHERE uv.user=:user AND uv.date=:date"),
+        @NamedQuery(name = UserVote.GET_USERVOTES_BY_RESTAURANT_AND_DATE, query = "SELECT u FROM UserVote uv LEFT JOIN User u ON uv.user.id=u.id WHERE uv.restaurant.id=:restaurant_id AND uv.date=:date"),
+        @NamedQuery(name = UserVote.GET_USERVOTE_BY_User_AND_DATE, query = "SELECT uv FROM UserVote uv WHERE uv.user=:user AND uv.date=:date"),
         @NamedQuery(name = UserVote.UPDATE_USERVOTE, query = "UPDATE UserVote uv SET uv.restaurant=:restaurant WHERE uv.user=:user AND uv.date=:date"),
         @NamedQuery(name = UserVote.GET_VOTES_FOR_DATE, query = "SELECT count(uv.restaurant.id), r.id, r.name FROM Restaurant r LEFT JOIN UserVote uv ON r.id=uv.restaurant.id AND uv.date=:date GROUP BY uv.restaurant.id, r.id ORDER BY count(uv.restaurant.id) DESC, r.name"),
 })
 public class UserVote extends AbstractBaseEntity {
 
     public static final String GET_ALL_USERVOTES = "UserVote.getAllUserVotes";
-    public static final String GET_USERVOTE = "UserVote.getUserVote";
+    public static final String GET_USERVOTES_BY_RESTAURANT_AND_DATE = "UserVote.getUserVotesByRestaurantAndDate";
+    public static final String GET_USERVOTE_BY_User_AND_DATE = "UserVote.getUserVoteByUserAndDate";
     public static final String UPDATE_USERVOTE = "UserVote.updateUserVote";
     public static final String GET_VOTES_FOR_DATE = "UserVote.getVotesForDate";
 

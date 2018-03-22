@@ -20,4 +20,6 @@ public interface VoteRepository {
     boolean isNew(User user);
 
     List<Object[]> getVotesForDate(LocalDate date);
+
+    List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date);
 }

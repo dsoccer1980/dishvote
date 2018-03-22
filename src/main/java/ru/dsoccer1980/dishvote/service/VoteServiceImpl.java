@@ -63,6 +63,11 @@ public class VoteServiceImpl implements VoteService {
         return result;
     }
 
+    @Override
+    public List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date) {
+        return voteRepository.getVotesOfUsersByRestaurantAndDate(restaurantId, date);
+    }
+
     private boolean canVote(LocalDate date) {
         return LocalDateTime.now().isBefore(LocalDateTime.of(date, DEADLINE));
     }

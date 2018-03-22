@@ -2,6 +2,7 @@ package ru.dsoccer1980.dishvote.service;
 
 
 import ru.dsoccer1980.dishvote.model.Restaurant;
+import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.model.UserVote;
 
 import java.time.LocalDate;
@@ -16,4 +17,7 @@ public interface VoteService {
     List<UserVote> getAllVotesForUser(int userId);
 
     Map<Restaurant, Long> getAllVotesForDate(LocalDate date);
+
+    List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date);
+
 }

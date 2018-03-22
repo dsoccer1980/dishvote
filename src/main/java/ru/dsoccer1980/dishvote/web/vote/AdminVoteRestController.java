@@ -5,9 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.dsoccer1980.dishvote.model.Restaurant;
+import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.service.VoteService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,5 +27,9 @@ public class AdminVoteRestController {
 
     public Map<Restaurant, Long> getAllVotesForDate(LocalDate date) {
         return service.getAllVotesForDate(date);
+    }
+
+    public List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date) {
+        return service.getVotesOfUsersByRestaurantAndDate(restaurantId, date);
     }
 }

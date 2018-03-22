@@ -20,7 +20,15 @@
                 <c:set var="restaurant" value="${entry.key}"></c:set>
                 <jsp:useBean id="restaurant" scope="page" type="ru.dsoccer1980.dishvote.model.Restaurant"/>
 
-                <td>${restaurant.name}</td>
+                <td>
+                    <c:if test = "${entry.value > 0}" >
+                        <a href="adminVote?action=showUsersByRestaurantAndDate&restaurant_id=${restaurant.id}&date=${date}">${restaurant.name}</a>
+                    </c:if>
+                    <c:if test = "${entry.value == 0}" >
+                        ${restaurant.name}
+                    </c:if>
+
+                </td>
                 <td>${entry.value}</td>
          </c:forEach>
         </tr>

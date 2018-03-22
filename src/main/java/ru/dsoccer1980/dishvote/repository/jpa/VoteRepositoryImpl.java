@@ -50,7 +50,7 @@ public class VoteRepositoryImpl implements VoteRepository {
     public UserVote getUserVote(User user, Restaurant restaurant, LocalDate date) {
         UserVote userVote;
         try {
-            userVote = em.createNamedQuery(UserVote.GET_USERVOTE, UserVote.class)
+            userVote = em.createNamedQuery(UserVote.GET_USERVOTE_BY_User_AND_DATE, UserVote.class)
                     .setParameter("user", user)
                     .setParameter("date", date)
                     .getSingleResult();
@@ -69,6 +69,14 @@ public class VoteRepositoryImpl implements VoteRepository {
     @Override
     public List<Object[]> getVotesForDate(LocalDate date) {
         return em.createNamedQuery(UserVote.GET_VOTES_FOR_DATE, Object[].class)
+                .setParameter("date", date)
+                .getResultList();
+    }
+
+    @Override
+    public List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date) {
+        return em.createNamedQuery(UserVote.GET_USERVOTES_BY_RESTAURANT_AND_DATE, User.class)
+                .setParameter("restaurant_id", restaurantId)
                 .setParameter("date", date)
                 .getResultList();
     }
