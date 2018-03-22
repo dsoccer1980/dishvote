@@ -15,4 +15,6 @@ public interface UserService {
     List<User> getAll();
 
     void create(User user);
+
+    boolean delete(int id);
 }

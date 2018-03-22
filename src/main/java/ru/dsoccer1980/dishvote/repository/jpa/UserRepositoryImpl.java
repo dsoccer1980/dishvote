@@ -40,5 +40,13 @@ public class UserRepositoryImpl implements UserRepository {
                 .getResultList();
     }
 
+    @Override
+    @Transactional
+    public boolean delete(int id) {
+        return em.createNamedQuery(User.DELETE_USER)
+                .setParameter("id", id)
+                .executeUpdate() != 0;
+    }
+
 
 }

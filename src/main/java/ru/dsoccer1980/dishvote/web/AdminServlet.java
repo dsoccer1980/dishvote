@@ -74,9 +74,16 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("users", userController.getAll());
             request.getRequestDispatcher("/userList.jsp").forward(request, response);
         }
-        else if (action.equals("userEditForm")) {
+        else if (action.equals("userEdit")) {
             request.setAttribute("user", userController.get(getId(request)));
             request.getRequestDispatcher("/userEditForm.jsp").forward(request, response);
+        }
+        else if (action.equals("userDelete")) {
+            int id = getId(request);
+            userController.delete(id);
+
+            request.setAttribute("users", userController.getAll());
+            request.getRequestDispatcher("/userList.jsp").forward(request, response);
         }
     }
 

@@ -13,4 +13,6 @@ public interface UserRepository {
     void save(User user);
 
     List<User> getAll();
+
+    boolean delete(int id);
 }

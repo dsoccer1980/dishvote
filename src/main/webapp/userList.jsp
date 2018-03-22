@@ -14,7 +14,9 @@
         <c:forEach items="${users}" var="user">
             <jsp:useBean id="user" scope="page" type="ru.dsoccer1980.dishvote.model.User"/>
             <tr>
-                <td><a href="admin?action=userEditForm&id=${user.id}">${user.name}</a></td>
+                <td>${user.name}</td>
+                <td><a href="admin?action=userEdit&id=${user.id}">Update</a></td>
+                <td><a href="admin?action=userDelete&id=${user.id}">Delete</a></td>
             </tr>
           </c:forEach>
     </table>
