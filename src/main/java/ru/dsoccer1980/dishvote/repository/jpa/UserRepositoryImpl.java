@@ -7,6 +7,7 @@ import ru.dsoccer1980.dishvote.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
@@ -31,6 +32,12 @@ public class UserRepositoryImpl implements UserRepository {
         else {
             em.merge(user);
         }
+    }
+
+    @Override
+    public List<User> getAll() {
+        return em.createNamedQuery(User.GET_ALL, User.class)
+                .getResultList();
     }
 
 

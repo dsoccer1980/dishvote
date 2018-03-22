@@ -7,12 +7,19 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
+@NamedQueries({
+        @NamedQuery(name = User.GET_ALL, query = "SELECT u FROM User u"),
+        @NamedQuery(name = User.DELETE_USER, query = "DELETE FROM User u WHERE u.id=:id")
+})
 public class User extends AbstractNamedEntity {
+
+    public static final String GET_ALL = "User.getAllUsers";
+    public static final String DELETE_USER = "User.deleteUser";
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -31,7 +38,7 @@ public class User extends AbstractNamedEntity {
 
     @Column(name = "registered", columnDefinition = "timestamp default now()")
     @NotNull
-    private Date registered = new Date();
+    private LocalDate registered = LocalDate.now();
 
     @Column(name = "isadmin", nullable = false, columnDefinition = "bool default false")
     @NotNull
@@ -45,7 +52,7 @@ public class User extends AbstractNamedEntity {
     }
 
 
-    public User(Integer id, String name, String email, String password, Date registered, boolean enabled, boolean isAdmin) {
+    public User(Integer id, String name, String email, String password, LocalDate registered, boolean enabled, boolean isAdmin) {
         super(id, name);
         this.email = email;
         this.password = password;
@@ -66,11 +73,11 @@ public class User extends AbstractNamedEntity {
         this.password = password;
     }
 
-    public Date getRegistered() {
+    public LocalDate getRegistered() {
         return registered;
     }
 
-    public void setRegistered(Date registered) {
+    public void setRegistered(LocalDate registered) {
         this.registered = registered;
     }
 

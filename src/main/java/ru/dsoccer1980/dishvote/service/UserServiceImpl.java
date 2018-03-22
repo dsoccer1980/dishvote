@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -23,6 +25,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User user) {
+        repository.save(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return repository.getAll();
+    }
+
+    @Override
+    public void create(User user) {
         repository.save(user);
     }
 }

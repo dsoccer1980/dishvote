@@ -23,10 +23,10 @@
     </table>
 
     <br>
-    Добавить новый ресторан
+    Add new restaurant
     <form action="restaurant?action=addRestaurant" method="post">
-        Название<input type="text" name="name"> <br>
-        Адрес <input type="text" name="address"> <br>
+        Name <input type="text" name="name"> <br>
+        Address <input type="text" name="address"> <br>
         <input type="submit" name="submit" value="submit">
     </form>
 </section>

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.service.UserService;
 
+import java.util.List;
+
 
 @Controller
 public class UserRestController {
@@ -25,5 +27,13 @@ public class UserRestController {
 
     public void update(User user) {
         service.update(user);
+    }
+
+    public List<User> getAll() {
+        return service.getAll();
+    }
+
+    public void create(User user) {
+        service.create(user);
     }
 }
