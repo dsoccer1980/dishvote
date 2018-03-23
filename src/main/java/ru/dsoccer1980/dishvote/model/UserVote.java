@@ -1,6 +1,9 @@
 package ru.dsoccer1980.dishvote.model;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -25,11 +28,13 @@ public class UserVote extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Restaurant restaurant;
 
@@ -45,7 +50,7 @@ public class UserVote extends AbstractBaseEntity {
     }
 
 
-    public UserVote(Integer id, User user, Restaurant restaurant, LocalDate date) {
+    public UserVote(Integer id, @NotNull User user, @NotNull Restaurant restaurant, @NotNull LocalDate date) {
         super(id);
         this.user = user;
         this.restaurant = restaurant;

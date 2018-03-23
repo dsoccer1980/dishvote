@@ -1,6 +1,9 @@
 package ru.dsoccer1980.dishvote.model;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -27,6 +30,7 @@ public class Dish extends AbstractNamedEntity {
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
     private Restaurant restaurant;
@@ -43,7 +47,7 @@ public class Dish extends AbstractNamedEntity {
     }
 
 
-    public Dish(Integer id, String name, BigDecimal price, Restaurant restaurant, LocalDate date) {
+    public Dish(Integer id, String name, BigDecimal price, Restaurant restaurant, @NotNull LocalDate date) {
         super(id, name);
         this.price = price;
         this.restaurant = restaurant;

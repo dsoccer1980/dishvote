@@ -52,7 +52,10 @@ public class User extends AbstractNamedEntity {
     }
 
 
-    public User(Integer id, String name, String email, String password, LocalDate registered, boolean enabled, boolean isAdmin) {
+    public User(Integer id, String name, @Email @NotBlank @Size(max = 100) String email,
+                @NotBlank @Size(min = 5, max = 64) String password, @NotNull LocalDate registered,
+                boolean enabled, boolean isAdmin)
+    {
         super(id, name);
         this.email = email;
         this.password = password;
