@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+     <!--<context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>-->
+    <!--<context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>-->
+
+    <!--<context:component-scan base-package="ru.dsoccer1980.dishvote.repository.jpa"/>-->
+
+    <bean id="inMemoryUserRepositoryImpl" class="ru.dsoccer1980.dishvote.repository.mock.InMemoryUserRepositoryImpl"/>
+
+    <!--&lt;!&ndash;no pooling&ndash;&gt;-->
+    <!--<bean id="dataSource"-->
+          <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<property name="driverClassName" value="${database.driverClassName}"/>-->
+        <!--<property name="url" value="${database.url}"/>-->
+        <!--<property name="username" value="${database.username}"/>-->
+        <!--<property name="password" value="${database.password}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"-->
+          <!--p:dataSource-ref="dataSource"-->
+          <!--p:packagesToScan="ru.dsoccer1980.**.model">-->
+        <!--&lt;!&ndash;p:persistenceUnitName="persistenceUnit">&ndash;&gt;-->
+
+        <!--<property name="jpaPropertyMap">-->
+            <!--<map>-->
+                <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>-->
+                <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}" value="${hibernate.use_sql_comments}"/>-->
+                <!--&lt;!&ndash;<entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_AUTO}" value="${hibernate.hbm2ddl.auto}"/>&ndash;&gt;-->
+            <!--</map>-->
+        <!--</property>-->
+
+        <!--<property name="jpaVendorAdapter">-->
+            <!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"-->
+                  <!--p:showSql="${jpa.showSql}">-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <tx:annotation-driven/>
+
+    <!--&lt;!&ndash; Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) &ndash;&gt;-->
+    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"-->
+          <!--p:entityManagerFactory-ref="entityManagerFactory"/>-->
+
+    <!--<bean class="ru.dsoccer1980.dishvote.repository.JpaUtil"/>-->
+
+</beans>
