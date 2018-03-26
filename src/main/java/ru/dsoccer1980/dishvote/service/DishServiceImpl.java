@@ -2,14 +2,18 @@ package ru.dsoccer1980.dishvote.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.repository.DishRepository;
+import ru.dsoccer1980.dishvote.util.Exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static ru.dsoccer1980.dishvote.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class DishServiceImpl implements DishService {
@@ -22,8 +26,8 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish get(int id) {
-        return repository.get(id);
+    public Dish get(int id) throws NotFoundException {
+        return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
@@ -32,22 +36,24 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public List<Dish> getAllDishByRestaurant(int id) {
-        return repository.getAllDishByRestaurant(id);
+    public List<Dish> getAllDishByRestaurant(int id) throws NotFoundException {
+        return checkNotFoundWithId(repository.getAllDishByRestaurant(id), id);
     }
 
     @Override
-    public void create(Dish dish) {
-        repository.save(dish);
+    public Dish create(Dish dish) {
+        Assert.notNull(dish, "dish must not be null");
+        return repository.save(dish);
     }
 
     @Override
-    public boolean delete(int dishId) {
-        return repository.delete(dishId);
+    public void delete(int dishId) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(dishId), dishId);
     }
 
     @Override
     public void update(Dish dish) {
+        Assert.notNull(dish, "dish must not be null");
         repository.save(dish);
     }
 

@@ -42,9 +42,9 @@ public class DishRestController {
         service.create(dish);
     }
 
-    public boolean delete(int dishId) {
+    public void delete(int dishId) {
         log.info("delete Dish(id):  {}", dishId);
-        return service.delete(dishId);
+        service.delete(dishId);
     }
 
     public void update(Dish dish) {

@@ -38,12 +38,13 @@ public class DishRepositoryImpl implements DishRepository {
 
     @Override
     @Transactional
-    public void save(Dish dish) {
+    public Dish save(Dish dish) {
         if (dish.isNew()) {
             em.persist(dish);
+            return dish;
         }
         else {
-            em.merge(dish);
+            return em.merge(dish);
         }
     }
 
