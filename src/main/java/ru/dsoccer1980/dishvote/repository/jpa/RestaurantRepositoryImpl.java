@@ -33,11 +33,11 @@ public class RestaurantRepositoryImpl implements RestaurantRepository{
     public Restaurant save(Restaurant restaurant) {
         if (restaurant.isNew()) {
             em.persist(restaurant);
+            return restaurant;
         }
         else {
-            em.merge(restaurant);
+            return em.merge(restaurant);
         }
-        return restaurant;
     }
 
     @Override
