@@ -41,8 +41,8 @@ public class UserRestController {
         service.create(user);
     }
 
-    public boolean delete(int id) {
+    public void delete(int id) {
         log.info("delete user:  {}", id);
-        return service.delete(id);
+        service.delete(id);
     }
 }

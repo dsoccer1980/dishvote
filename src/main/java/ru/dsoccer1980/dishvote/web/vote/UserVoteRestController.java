@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.dsoccer1980.dishvote.model.UserVote;
 import ru.dsoccer1980.dishvote.service.VoteService;
-import ru.dsoccer1980.dishvote.util.VoteException;
+import ru.dsoccer1980.dishvote.util.Exception.VoteException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +34,4 @@ public class UserVoteRestController {
         log.info("get all votes for user:  {}", userId);
         return service.getAllVotesForUser(userId);
     }
-
-
-
 }

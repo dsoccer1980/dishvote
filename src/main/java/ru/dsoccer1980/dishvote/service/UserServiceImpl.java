@@ -2,10 +2,14 @@ package ru.dsoccer1980.dishvote.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
+import ru.dsoccer1980.dishvote.util.Exception.NotFoundException;
 
 import java.util.List;
+
+import static ru.dsoccer1980.dishvote.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,13 +23,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User get(int id) {
-        return repository.get(id);
+    public User get(int id) throws NotFoundException {
+        return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
-    public void update(User user) {
-        repository.save(user);
+    public void update(User user) throws NotFoundException {
+        Assert.notNull(user, "user must not be null");
+        checkNotFoundWithId(repository.save(user), user.getId());
     }
 
     @Override
@@ -34,12 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void create(User user) {
-        repository.save(user);
+    public User create(User user) {
+        Assert.notNull(user, "user must not be null");
+        return repository.save(user);
     }
 
     @Override
-    public boolean delete(int id) {
-        return repository.delete(id);
+    public void delete(int id) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(id), id);
     }
 }

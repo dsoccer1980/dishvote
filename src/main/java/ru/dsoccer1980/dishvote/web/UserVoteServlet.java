@@ -2,7 +2,7 @@ package ru.dsoccer1980.dishvote.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.dsoccer1980.dishvote.util.VoteException;
+import ru.dsoccer1980.dishvote.util.Exception.VoteException;
 import ru.dsoccer1980.dishvote.web.dish.DishRestController;
 import ru.dsoccer1980.dishvote.web.vote.UserVoteRestController;
 

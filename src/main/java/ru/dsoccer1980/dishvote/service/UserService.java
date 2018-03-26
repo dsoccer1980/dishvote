@@ -2,19 +2,20 @@ package ru.dsoccer1980.dishvote.service;
 
 
 import ru.dsoccer1980.dishvote.model.User;
+import ru.dsoccer1980.dishvote.util.Exception.NotFoundException;
 
 import java.util.List;
 
 
 public interface UserService {
 
-    User get(int id);
+    User get(int id) throws NotFoundException;
 
-    void update(User user);
+    void update(User user)  throws NotFoundException;
 
     List<User> getAll();
 
-    void create(User user);
+    User create(User user);
 
-    boolean delete(int id);
+    void delete(int id) throws NotFoundException;
 }

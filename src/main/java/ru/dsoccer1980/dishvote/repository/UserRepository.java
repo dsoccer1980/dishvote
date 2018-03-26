@@ -10,7 +10,7 @@ public interface UserRepository {
 
     User get(int id);
 
-    void save(User user);
+    User save(User user);
 
     List<User> getAll();
 

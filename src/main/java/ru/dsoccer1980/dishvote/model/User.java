@@ -51,6 +51,10 @@ public class User extends AbstractNamedEntity {
         this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.registered, u.isEnabled(), u.isAdmin());
     }
 
+    public User(Integer id, String name, @Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 64) String password)
+    {
+        this(id, name, email, password, LocalDate.now(), true, false);
+    }
 
     public User(Integer id, String name, @Email @NotBlank @Size(max = 100) String email,
                 @NotBlank @Size(min = 5, max = 64) String password, @NotNull LocalDate registered,

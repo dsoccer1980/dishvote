@@ -1,4 +1,4 @@
-package ru.dsoccer1980.dishvote.util;
+package ru.dsoccer1980.dishvote.util.Exception;
 
 public class VoteException extends RuntimeException {
 
