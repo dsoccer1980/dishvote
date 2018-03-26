@@ -18,6 +18,6 @@ public interface VoteService {
 
     Map<Restaurant, Long> getAllVotesForDate(LocalDate date);
 
-    List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date);
+    List<User> getUsersVotedByRestaurantAndDate(int restaurantId, LocalDate date);
 
 }

@@ -32,6 +32,6 @@ public class AdminVoteRestController {
 
     public List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date) {
         log.info("get votes of users by restaurant: {} and date: {}", restaurantId, date);
-        return service.getVotesOfUsersByRestaurantAndDate(restaurantId, date);
+        return service.getUsersVotedByRestaurantAndDate(restaurantId, date);
     }
 }
