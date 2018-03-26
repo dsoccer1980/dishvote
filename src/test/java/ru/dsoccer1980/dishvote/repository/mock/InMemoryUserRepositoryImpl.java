@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static ru.dsoccer1980.dishvote.UserTestData.ADMIN;
-import static ru.dsoccer1980.dishvote.UserTestData.USER;
+import static ru.dsoccer1980.dishvote.UserTestData.USER1;
 
 @Repository
 public class InMemoryUserRepositoryImpl implements UserRepository {
@@ -21,7 +21,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     public void init() {
         repository.clear();
-        repository.put(UserTestData.USER_ID, USER);
+        repository.put(UserTestData.USER_ID1, USER1);
         repository.put(UserTestData.ADMIN_ID, ADMIN);
     }
 

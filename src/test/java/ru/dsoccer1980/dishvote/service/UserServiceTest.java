@@ -31,19 +31,19 @@ public class UserServiceTest {
         User newUser = new User(null, "newUser", "m@mail.ru", "12345");
         User created = service.create(newUser);
         newUser.setId(created.getId());
-        assertMatch(service.getAll(), USER, ADMIN, newUser);
+        assertMatch(service.getAll(), USER1, USER2, ADMIN, newUser);
     }
 
     @Test
     public void get() throws Exception {
-        User user = service.get(USER_ID);
-        assertMatch(user, USER);
+        User user = service.get(USER_ID1);
+        assertMatch(user, USER1);
     }
 
     @Test
     public void getAll() throws Exception {
         List<User> userList = service.getAll();
-        assertMatch(userList, USER, ADMIN);
+        assertMatch(userList, USER1, USER2, ADMIN);
     }
 
     @Test(expected = NotFoundException.class)
@@ -53,16 +53,16 @@ public class UserServiceTest {
 
     @Test
     public void update() throws Exception {
-        User updated = new User(USER);
+        User updated = new User(USER1);
         updated.setName("UpdatedUser");
         service.update(updated);
-        assertMatch(service.get(USER_ID), updated);
+        assertMatch(service.get(USER_ID1), updated);
     }
 
     @Test
     public void delete() throws Exception {
-        service.delete(USER_ID);
-        assertMatch(service.getAll(), ADMIN);
+        service.delete(USER_ID1);
+        assertMatch(service.getAll(), USER2, ADMIN);
     }
 
     @Test(expected = NotFoundException.class)
@@ -72,6 +72,6 @@ public class UserServiceTest {
 
     @Test(expected = DataAccessException.class)
     public void duplicateMailCreate() throws Exception {
-        service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass"));
+        service.create(new User(null, "Duplicate", "user1@yandex.ru", "newPass"));
     }
 }

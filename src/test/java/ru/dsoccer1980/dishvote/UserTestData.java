@@ -10,10 +10,12 @@ import static ru.dsoccer1980.dishvote.model.AbstractBaseEntity.START_SEQ;
 
 public class UserTestData {
 
-    public static final int USER_ID = START_SEQ;
-    public static final int ADMIN_ID = START_SEQ + 1;
+    public static final int USER_ID1 = START_SEQ;
+    public static final int USER_ID2 = START_SEQ + 1;
+    public static final int ADMIN_ID = START_SEQ + 2;
 
-    public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", LocalDate.now(), true, false);
+    public static final User USER1 = new User(USER_ID1, "User1", "user1@yandex.ru", "password", LocalDate.now(), true, false);
+    public static final User USER2 = new User(USER_ID2, "User2", "user2@yandex.ru", "password", LocalDate.now(), true, false);
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", LocalDate.now(), true, true);
 
     public static void assertMatch(User actual, User expected) {
