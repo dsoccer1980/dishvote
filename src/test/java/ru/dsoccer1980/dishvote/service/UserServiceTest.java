@@ -13,7 +13,7 @@ import ru.dsoccer1980.dishvote.util.Exception.NotFoundException;
 
 import java.util.List;
 
-import static ru.dsoccer1980.dishvote.UserTestData.*;
+import static ru.dsoccer1980.dishvote.testdata.UserTestData.*;
 
 @ContextConfiguration(locations = {
         "classpath:spring/spring-app.xml",

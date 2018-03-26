@@ -1,7 +1,7 @@
 package ru.dsoccer1980.dishvote.repository.mock;
 
 import org.springframework.stereotype.Repository;
-import ru.dsoccer1980.dishvote.UserTestData;
+import ru.dsoccer1980.dishvote.testdata.UserTestData;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
 
@@ -10,8 +10,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static ru.dsoccer1980.dishvote.UserTestData.ADMIN;
-import static ru.dsoccer1980.dishvote.UserTestData.USER1;
+import static ru.dsoccer1980.dishvote.testdata.UserTestData.ADMIN;
+import static ru.dsoccer1980.dishvote.testdata.UserTestData.USER1;
 
 @Repository
 public class InMemoryUserRepositoryImpl implements UserRepository {

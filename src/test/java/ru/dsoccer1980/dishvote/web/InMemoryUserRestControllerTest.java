@@ -8,14 +8,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.dsoccer1980.dishvote.UserTestData;
+import ru.dsoccer1980.dishvote.testdata.UserTestData;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.repository.mock.InMemoryUserRepositoryImpl;
 import ru.dsoccer1980.dishvote.web.user.UserRestController;
 
 import java.util.Collection;
 
-import static ru.dsoccer1980.dishvote.UserTestData.ADMIN;
+import static ru.dsoccer1980.dishvote.testdata.UserTestData.ADMIN;
 
 @ContextConfiguration({"classpath:spring/test-spring-app.xml", "classpath:spring/test-spring-db.xml"})
 @RunWith(SpringRunner.class)
