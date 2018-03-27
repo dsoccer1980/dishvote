@@ -41,7 +41,7 @@ public class InMemoryRestaurantRepositoryImpl implements RestaurantRepository {
             repository.put(restaurant.getId(), restaurant);
             return restaurant;
         }
-        return repository.computeIfPresent(restaurant.getId(), (id, oldUser) -> restaurant);
+        return repository.computeIfPresent(restaurant.getId(), (id, oldRestaurant) -> restaurant);
     }
 
     @Override
