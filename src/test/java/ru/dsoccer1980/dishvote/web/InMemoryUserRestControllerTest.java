@@ -50,4 +50,19 @@ public class InMemoryUserRestControllerTest {
         assertMatch(user, USER1);
     }
 
+    @Test
+    public void testCreate() {
+        User newUser = new User(null, "newUser", "new@mail.ru", "password");
+        controller.create(newUser);
+        assertMatch(controller.getAll(), USER1, ADMIN, newUser);
+    }
+
+    @Test
+    public void testUpdate() {
+        User updateUser = new User(USER1);
+        updateUser.setName("new Name");
+        controller.update(updateUser);
+        assertMatch(controller.getAll(), updateUser, ADMIN);
+    }
+
 }

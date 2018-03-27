@@ -50,4 +50,19 @@ public class InMemoryRestaurantRestControllerTest {
         assertMatch(restaurant, RESTAURANT1);
     }
 
+    @Test
+    public void testCreate() {
+        Restaurant newRestaurant = new Restaurant(null, "newRestaurant", "newAddress");
+        controller.create(newRestaurant);
+        assertMatch(controller.getAll(), RESTAURANT1, RESTAURANT2, newRestaurant);
+    }
+
+    @Test
+    public void testUpdate() {
+        Restaurant updateRestaurant = new Restaurant(RESTAURANT1);
+        updateRestaurant.setName("new Name");
+        controller.update(updateRestaurant);
+        assertMatch(controller.getAll(), RESTAURANT1, RESTAURANT2);
+    }
+
 }
