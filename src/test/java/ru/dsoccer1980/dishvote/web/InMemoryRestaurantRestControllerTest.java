@@ -7,24 +7,24 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.dsoccer1980.dishvote.model.User;
-import ru.dsoccer1980.dishvote.repository.mock.InMemoryUserRepositoryImpl;
+import ru.dsoccer1980.dishvote.model.Restaurant;
+import ru.dsoccer1980.dishvote.repository.mock.InMemoryRestaurantRepositoryImpl;
 import ru.dsoccer1980.dishvote.util.Exception.NotFoundException;
-import ru.dsoccer1980.dishvote.web.user.UserRestController;
+import ru.dsoccer1980.dishvote.web.restaurant.RestaurantRestController;
 
 import java.util.List;
 
-import static ru.dsoccer1980.dishvote.testdata.UserTestData.*;
+import static ru.dsoccer1980.dishvote.testdata.RestaurantTestData.*;
 
 @ContextConfiguration({"classpath:spring/test-spring-app.xml", "classpath:spring/test-spring-db.xml"})
 @RunWith(SpringRunner.class)
-public class InMemoryUserRestControllerTest {
+public class InMemoryRestaurantRestControllerTest {
 
     @Autowired
-    private UserRestController controller;
+    private RestaurantRestController controller;
 
     @Autowired
-    private InMemoryUserRepositoryImpl repository;
+    private InMemoryRestaurantRepositoryImpl repository;
 
     @Before
     public void setUp() throws Exception {
@@ -33,10 +33,10 @@ public class InMemoryUserRestControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        controller.delete(USER_ID1);
-        List<User> users = controller.getAll();
-        Assert.assertEquals(users.size(), 1);
-        Assert.assertEquals(users.iterator().next(), ADMIN);
+        controller.delete(RESTAURANT_ID1);
+        List<Restaurant> restaurant = controller.getAll();
+        Assert.assertEquals(restaurant.size(), 1);
+        Assert.assertEquals(restaurant.iterator().next(), RESTAURANT2);
     }
 
     @Test(expected = NotFoundException.class)
@@ -46,8 +46,8 @@ public class InMemoryUserRestControllerTest {
 
     @Test
     public void testGet() {
-        User user = controller.get(USER_ID1);
-        assertMatch(user, USER1);
+        Restaurant restaurant = controller.get(RESTAURANT_ID1);
+        assertMatch(restaurant, RESTAURANT1);
     }
 
 }

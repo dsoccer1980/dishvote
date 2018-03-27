@@ -5,6 +5,7 @@ import ru.dsoccer1980.dishvote.testdata.UserTestData;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,7 +26,6 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
         repository.put(UserTestData.ADMIN_ID, ADMIN);
     }
 
-
     @Override
     public User get(int id) {
         return repository.get(id);
@@ -33,16 +33,21 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        return null;
+        if (user.isNew()) {
+            user.setId(counter.incrementAndGet());
+            repository.put(user.getId(), user);
+            return user;
+        }
+        return repository.computeIfPresent(user.getId(), (id, oldUser) -> user);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return new ArrayList<User>(repository.values());
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return repository.remove(id) != null;
     }
 }
