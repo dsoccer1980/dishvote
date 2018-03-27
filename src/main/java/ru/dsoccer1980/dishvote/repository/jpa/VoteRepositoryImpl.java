@@ -62,11 +62,6 @@ public class VoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public boolean isNew(User user) {
-        return user.getId() == null;
-    }
-
-    @Override
     public List<Object[]> getVotesForDate(LocalDate date) {
         return em.createNamedQuery(UserVote.GET_VOTES_FOR_DATE, Object[].class)
                 .setParameter("date", date)
@@ -74,7 +69,7 @@ public class VoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<User> getVotesOfUsersByRestaurantAndDate(int restaurantId, LocalDate date) {
+    public List<User> getUsersVotedByRestaurantAndDate(int restaurantId, LocalDate date) {
         return em.createNamedQuery(UserVote.GET_USERVOTES_BY_RESTAURANT_AND_DATE, User.class)
                 .setParameter("restaurant_id", restaurantId)
                 .setParameter("date", date)

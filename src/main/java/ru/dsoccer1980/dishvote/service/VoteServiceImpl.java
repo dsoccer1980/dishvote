@@ -65,7 +65,7 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public List<User> getUsersVotedByRestaurantAndDate(int restaurantId, LocalDate date) {
-        return voteRepository.getVotesOfUsersByRestaurantAndDate(restaurantId, date);
+        return voteRepository.getUsersVotedByRestaurantAndDate(restaurantId, date);
     }
 
     private boolean canVote(LocalDate date) {

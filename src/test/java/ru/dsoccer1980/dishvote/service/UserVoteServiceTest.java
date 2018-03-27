@@ -36,7 +36,7 @@ public class UserVoteServiceTest {
 
     @Test
     public void save() throws Exception {
-        service.save(USER_ID1, RESTAURANT_ID2, LocalDate.of(2018, 03, 27));
+        service.save(USER_ID1, RESTAURANT_ID2, LocalDate.now().plusDays(1));
         assertMatch(service.getAllVotesForUser(USER_ID1), USER_VOTE3,  USER_VOTE1);
     }
 
