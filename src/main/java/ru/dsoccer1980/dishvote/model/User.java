@@ -14,12 +14,14 @@ import java.time.LocalDate;
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 @NamedQueries({
         @NamedQuery(name = User.GET_ALL, query = "SELECT u FROM User u"),
-        @NamedQuery(name = User.DELETE_USER, query = "DELETE FROM User u WHERE u.id=:id")
+        @NamedQuery(name = User.DELETE_USER, query = "DELETE FROM User u WHERE u.id=:id"),
+        @NamedQuery(name = User.GET_BY_EMAIL, query = "SELECT u FROM User u WHERE u.email=:email")
 })
 public class User extends AbstractNamedEntity {
 
     public static final String GET_ALL = "User.getAllUsers";
     public static final String DELETE_USER = "User.deleteUser";
+    public static final String GET_BY_EMAIL = "User.getByEmail";
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
@@ -116,5 +118,9 @@ public class User extends AbstractNamedEntity {
                 ", name=" + name +
                 ", enabled=" + enabled +
                 '}';
+    }
+
+    public String getRole() {
+        return (isAdmin()? "ROLE_ADMIN": "ROLE_USER");
     }
 }

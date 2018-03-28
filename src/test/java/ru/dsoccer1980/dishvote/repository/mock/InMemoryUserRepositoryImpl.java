@@ -50,4 +50,11 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     public boolean delete(int id) {
         return repository.remove(id) != null;
     }
+
+    @Override
+    public User getByEmail(String email) {
+        return repository.values().stream()
+                .filter(user -> (user.getEmail().equals(email)))
+                .findFirst().orElse(null);
+    }
 }

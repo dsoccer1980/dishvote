@@ -49,5 +49,12 @@ public class UserRepositoryImpl implements UserRepository {
                 .executeUpdate() != 0;
     }
 
+    @Override
+    public User getByEmail(String email) {
+        return em.createNamedQuery(User.GET_BY_EMAIL, User.class)
+                .setParameter("email", email)
+                .getSingleResult();
+    }
+
 
 }

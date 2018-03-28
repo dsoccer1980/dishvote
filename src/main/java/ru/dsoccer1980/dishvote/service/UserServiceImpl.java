@@ -1,8 +1,12 @@
 package ru.dsoccer1980.dishvote.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.dsoccer1980.dishvote.AuthorizedUser;
 import ru.dsoccer1980.dishvote.model.User;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
 import ru.dsoccer1980.dishvote.util.Exception.NotFoundException;
@@ -11,8 +15,8 @@ import java.util.List;
 
 import static ru.dsoccer1980.dishvote.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository repository;
 
@@ -47,5 +51,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(repository.delete(id), id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.getByEmail(email.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new AuthorizedUser(user);
+
     }
 }

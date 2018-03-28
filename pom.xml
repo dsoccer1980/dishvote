@@ -17,6 +17,7 @@
         <tomcat.version>8.5.24</tomcat.version>
         <spring.version>5.0.1.RELEASE</spring.version>
         <spring-data-jpa.version>2.0.2.RELEASE</spring-data-jpa.version>
+        <spring-security.version>5.0.0.RELEASE</spring-security.version>
 
         <!--    Tests  -->
         <junit.version>4.12</junit.version>
@@ -61,11 +62,14 @@
     </build>
 
     <dependencies>
+        <!--DB-->
+        <!--HSQLDB-->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.4.0</version>
         </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -77,11 +81,23 @@
             <version>${spring-data-jpa.version}</version>
         </dependency>
 
+        <!--security-->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>${postgresql.version}</version>-->
+        <!--</dependency>-->
 
         <!--- ORM -->
         <dependency>

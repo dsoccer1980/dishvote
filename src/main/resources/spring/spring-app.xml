@@ -8,4 +8,5 @@
 
     <context:component-scan base-package="ru.dsoccer1980.**.web"/>
 
+    <!--<import resource="spring-security.xml"/>-->
 </beans>

@@ -15,4 +15,6 @@ public interface UserRepository {
     List<User> getAll();
 
     boolean delete(int id);
+
+    User getByEmail(String email);
 }
