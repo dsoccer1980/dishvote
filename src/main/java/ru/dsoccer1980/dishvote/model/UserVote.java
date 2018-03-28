@@ -16,7 +16,7 @@ import java.time.LocalDate;
         @NamedQuery(name = UserVote.GET_USERVOTES_BY_RESTAURANT_AND_DATE, query = "SELECT u FROM UserVote uv LEFT JOIN User u ON uv.user.id=u.id WHERE uv.restaurant.id=:restaurant_id AND uv.date=:date"),
         @NamedQuery(name = UserVote.GET_USERVOTE_BY_User_AND_DATE, query = "SELECT uv FROM UserVote uv WHERE uv.user=:user AND uv.date=:date"),
         @NamedQuery(name = UserVote.UPDATE_USERVOTE, query = "UPDATE UserVote uv SET uv.restaurant=:restaurant WHERE uv.user=:user AND uv.date=:date"),
-        @NamedQuery(name = UserVote.GET_VOTES_FOR_DATE, query = "SELECT count(uv.restaurant.id), r.id, r.name FROM Restaurant r LEFT JOIN UserVote uv ON r.id=uv.restaurant.id AND uv.date=:date GROUP BY uv.restaurant.id, r.id ORDER BY count(uv.restaurant.id) DESC, r.name"),
+        @NamedQuery(name = UserVote.GET_USERVOTES_FOR_RESTAURANT_ON_DATE, query = "SELECT count(uv.restaurant.id), r.id, r.name FROM Restaurant r LEFT JOIN UserVote uv ON r.id=uv.restaurant.id AND uv.date=:date GROUP BY uv.restaurant.id, r.id ORDER BY count(uv.restaurant.id) DESC, r.name"),
 })
 public class UserVote extends AbstractBaseEntity {
 
@@ -24,7 +24,7 @@ public class UserVote extends AbstractBaseEntity {
     public static final String GET_USERVOTES_BY_RESTAURANT_AND_DATE = "UserVote.getUserVotesByRestaurantAndDate";
     public static final String GET_USERVOTE_BY_User_AND_DATE = "UserVote.getUserVoteByUserAndDate";
     public static final String UPDATE_USERVOTE = "UserVote.updateUserVote";
-    public static final String GET_VOTES_FOR_DATE = "UserVote.getVotesForDate";
+    public static final String GET_USERVOTES_FOR_RESTAURANT_ON_DATE = "UserVote.getVotesForRestaurantOnDate";
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
@@ -48,7 +48,6 @@ public class UserVote extends AbstractBaseEntity {
     public UserVote(UserVote v) {
         this(v.getId(), v.getUser(), v.getRestaurant(), v.getDate());
     }
-
 
     public UserVote(Integer id, @NotNull User user, @NotNull Restaurant restaurant, @NotNull LocalDate date) {
         super(id);

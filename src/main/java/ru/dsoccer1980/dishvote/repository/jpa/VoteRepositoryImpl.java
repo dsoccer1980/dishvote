@@ -12,6 +12,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 @Transactional(readOnly = true)
@@ -62,10 +64,17 @@ public class VoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<Object[]> getVotesForDate(LocalDate date) {
-        return em.createNamedQuery(UserVote.GET_VOTES_FOR_DATE, Object[].class)
+    public Map<Integer, Long> getVotesForRestaurantOnDate(LocalDate date) {
+        List<Object[]> votesForDate = em.createNamedQuery(UserVote.GET_USERVOTES_FOR_RESTAURANT_ON_DATE, Object[].class)
                 .setParameter("date", date)
                 .getResultList();
+
+        Map<Integer, Long> result = new ConcurrentHashMap<>();
+        for (Object[] vote : votesForDate) {
+            result.put((Integer)vote[1], Long.parseLong(vote[0].toString()));
+        }
+
+        return result;
     }
 
     @Override

@@ -83,7 +83,7 @@ public class InMemoryDishRestControllerTest {
 
     @Test
     public void testGetDishOnDate() {
-        Map<Integer, List<Dish>> dishOnDate = controller.getDishOnDate(LocalDate.of(2018, 03, 26));
+        Map<Integer, List<Dish>> dishOnDate = controller.getDishOnDate(TEST_DATE);
         assertThat(dishOnDate.values().toArray()).isEqualTo(new Object[]{Arrays.asList(DISH1, DISH2)});
     }
 

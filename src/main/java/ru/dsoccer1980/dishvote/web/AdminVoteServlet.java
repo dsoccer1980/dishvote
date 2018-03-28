@@ -51,7 +51,7 @@ public class AdminVoteServlet extends HttpServlet {
                 date = LocalDate.parse(request.getParameter("date"));
             }
             request.setAttribute("date", date);
-            Map<Restaurant, Long> allVotesForDate = voteController.getAllVotesForDate(date);
+            Map<Restaurant, Long> allVotesForDate = voteController.getVotesForRestaurantOnDate(date);
             if (allVotesForDate.size() == 0) {
                 request.setAttribute("message", "There are not votes on this date");
             } else {

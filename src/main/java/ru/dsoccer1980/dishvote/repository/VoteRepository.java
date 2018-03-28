@@ -7,6 +7,7 @@ import ru.dsoccer1980.dishvote.model.UserVote;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 
 public interface VoteRepository {
@@ -17,7 +18,7 @@ public interface VoteRepository {
 
     UserVote getUserVote(User user, Restaurant restaurant, LocalDate date);
 
-    List<Object[]> getVotesForDate(LocalDate date);
+    Map<Integer, Long> getVotesForRestaurantOnDate(LocalDate date);
 
     List<User> getUsersVotedByRestaurantAndDate(int restaurantId, LocalDate date);
 }

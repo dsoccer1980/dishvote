@@ -48,7 +48,7 @@ public class UserVoteServiceTest {
 
     @Test
     public void getAllVotesForDate() throws Exception {
-        Map<Restaurant, Long> allVotesForDate = service.getAllVotesForDate(LocalDate.of(2018, 03, 26));
+        Map<Restaurant, Long> allVotesForDate = service.getVotesForRestaurantOnDate(LocalDate.of(2018, 03, 26));
         Map<Restaurant, Long> expected = new HashMap<>();
         expected.put(RESTAURANT1, 1L);
         expected.put(RESTAURANT2, 1L);

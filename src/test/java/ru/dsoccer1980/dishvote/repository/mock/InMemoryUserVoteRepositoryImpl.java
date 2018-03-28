@@ -62,8 +62,15 @@ public class InMemoryUserVoteRepositoryImpl implements VoteRepository {
 
 
     @Override
-    public List<Object[]> getVotesForDate(LocalDate date) {
-        return null;
+    public Map<Integer, Long> getVotesForRestaurantOnDate(LocalDate date) {
+        List<Map<Integer, UserVote>> list = repository.values().stream().collect(Collectors.toList());
+        Map<Integer, Long> result = new ConcurrentHashMap<>();
+        for (Map<Integer, UserVote> map : list) {
+            Map<Integer, Long> collect = map.values().stream().filter(userVote -> (userVote.getDate().equals(date)))
+                    .collect(Collectors.groupingBy(u -> u.getRestaurant().getId(), Collectors.counting()));
+            result.putAll(collect);
+        }
+        return result;
     }
 
     @Override

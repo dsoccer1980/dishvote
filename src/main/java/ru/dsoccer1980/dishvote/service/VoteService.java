@@ -16,7 +16,7 @@ public interface VoteService {
 
     List<UserVote> getAllVotesForUser(int userId);
 
-    Map<Restaurant, Long> getAllVotesForDate(LocalDate date);
+    Map<Restaurant, Long> getVotesForRestaurantOnDate(LocalDate date);
 
     List<User> getUsersVotedByRestaurantAndDate(int restaurantId, LocalDate date);
 
