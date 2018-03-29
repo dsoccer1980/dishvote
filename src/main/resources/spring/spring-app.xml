@@ -6,7 +6,7 @@
 
     <context:component-scan base-package="ru.dsoccer1980.**.service"/>
 
-    <context:component-scan base-package="ru.dsoccer1980.**.web"/>
+    <!--<context:component-scan base-package="ru.dsoccer1980.**.web"/>-->
 
-    <!--<import resource="spring-security.xml"/>-->
+    <import resource="spring-security.xml"/>
 </beans>
