@@ -44,11 +44,11 @@ public class InMemoryUserRestControllerTest {
         controller.delete(10);
     }
 
-//    @Test
-//    public void testGet() {
-//        User user = controller.get(USER_ID1);
-//        assertMatch(user, USER1);
-//    }
+    @Test
+    public void testGet() {
+        User user = controller.get(USER_ID1);
+        assertMatch(user, USER1);
+    }
 
     @Test
     public void testCreate() {

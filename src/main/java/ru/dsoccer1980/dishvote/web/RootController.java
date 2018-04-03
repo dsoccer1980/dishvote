@@ -97,6 +97,13 @@ public class RootController {
         return "voteForm";
     }
 
+    @GetMapping("/user/get")
+    public String getUser(Model model, HttpServletRequest request) {
+        int id = AuthorizedUser.getId();
+        model.addAttribute("user", userService.get(id));
+        return "userProfile";
+    }
+
     @PostMapping("/user/update")
     public String updateUser(Model model, HttpServletRequest request) {
         int id = AuthorizedUser.getId();
