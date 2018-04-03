@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.dsoccer1980.dishvote.model.Dish;
 import ru.dsoccer1980.dishvote.model.Restaurant;
-import ru.dsoccer1980.dishvote.model.User;
-import ru.dsoccer1980.dishvote.model.UserVote;
+import ru.dsoccer1980.dishvote.model.User;;
 import ru.dsoccer1980.dishvote.service.DishService;
 import ru.dsoccer1980.dishvote.service.RestaurantService;
 import ru.dsoccer1980.dishvote.service.UserService;
@@ -22,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 @Controller
 public class RootController {
@@ -173,7 +172,7 @@ public class RootController {
     }
 
     @GetMapping("/dish/update/id/{id}")
-    public String dishUpdate(@PathVariable(value = "id") String id, HttpServletRequest request) throws UnsupportedEncodingException {
+    public String dishUpdate(@PathVariable(value = "id") String id, HttpServletRequest request) {
         request.setAttribute("dish", dishService.get(getId(id)));
         return "dishForm";
     }
@@ -189,11 +188,82 @@ public class RootController {
     }
 
     @GetMapping("/dish/delete/id/{id}")
-    public String dishDelete(@PathVariable(value = "id") String id, HttpServletRequest request) throws UnsupportedEncodingException {
+    public String dishDelete(@PathVariable(value = "id") String id, HttpServletRequest request) {
         int dishId = getId(id);
         int restaurantId = dishService.get(dishId).getRestaurant().getId();
         dishService.delete(dishId);
         return "redirect:/restaurant/listdish/id/" + restaurantId;
+    }
+
+    @GetMapping("/adminVote/show")
+    public String adminVoteShow(HttpServletRequest request) {
+        LocalDate date = LocalDate.now();
+        String dateString = request.getParameter("date");
+        if (dateString != null) {
+            date = LocalDate.parse(request.getParameter("date"));
+        }
+        request.setAttribute("date", date);
+        Map<Restaurant, Long> allVotesForDate = voteService.getVotesForRestaurantOnDate(date);
+        if (allVotesForDate.size() == 0) {
+            request.setAttribute("message", "There are not votes on this date");
+        } else {
+            request.setAttribute("allVotesForDate", allVotesForDate);
+        }
+        return "voteForDateForm";
+    }
+
+    @GetMapping("/adminVote/showUsersByRestaurantAndDate/restaurant_id/{restaurant_id}/date/{date}")
+    public String adminVoteShowUsersByRestaurantAndDate(@PathVariable(value = "restaurant_id") String restaurant_id,
+                                                        @PathVariable(value = "date") String date,
+                                                        HttpServletRequest request)
+    {
+        LocalDate localDate = LocalDate.parse(date);
+        int restaurantId = Integer.parseInt(restaurant_id);
+        List<User> userList = voteService.getUsersVotedByRestaurantAndDate(restaurantId, localDate);
+        request.setAttribute("userList", userList);
+        return "voteUsersByRestaurantAndDate";
+    }
+
+    @GetMapping("/admin/showUsers")
+    public String adminShowUsers(HttpServletRequest request) {
+        int userId = AuthorizedUser.getId();
+
+        request.setAttribute("users", userService.getAll());
+        return "userList";
+    }
+
+    @GetMapping("/admin/userEditForm/id/{id}")
+    public String adminUserEditForm(@PathVariable(value = "id") int id, HttpServletRequest request) {
+        request.setAttribute("user", userService.get(id));
+        return "userEditForm";
+    }
+
+    @GetMapping("/admin/userDelete/id/{id}")
+    public String adminUserDelete(@PathVariable(value = "id") int id, HttpServletRequest request) {
+        userService.delete(id);
+
+        request.setAttribute("users", userService.getAll());
+        return "userList";
+    }
+
+    @PostMapping("/admin/addUser")
+    public String adminAddUser(HttpServletRequest request) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+
+        userService.update(getUser(request, "addUser"));
+
+        request.setAttribute("users", userService.getAll());
+        return "userList";
+    }
+
+    @PostMapping("/admin/editUser")
+    public String adminEditUser(HttpServletRequest request) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+
+        userService.create(getUser(request, "editUser"));
+
+        request.setAttribute("users", userService.getAll());
+        return "userList";
     }
 
     private Dish getDish(Integer id, HttpServletRequest request) {
@@ -208,6 +278,23 @@ public class RootController {
 
     private int getId(String id) {
         return Integer.parseInt(id);
+    }
+
+    private User getUser(HttpServletRequest request, String action) {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        boolean enabled = Boolean.valueOf(request.getParameter("enabled"));
+        boolean isAdmin = Boolean.valueOf(request.getParameter("is_admin"));
+        LocalDate registered = LocalDate.now();
+        Integer id = null;
+
+        if (action.equals("editUser")) {
+            registered = LocalDate.parse(request.getParameter("registered"));
+            id = getId(request.getParameter("id"));
+        }
+        User user = new User(id, name, email, password, registered, enabled, isAdmin);
+        return user;
     }
 
 }

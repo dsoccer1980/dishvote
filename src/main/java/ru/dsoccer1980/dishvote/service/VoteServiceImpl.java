@@ -8,6 +8,7 @@ import ru.dsoccer1980.dishvote.model.UserVote;
 import ru.dsoccer1980.dishvote.repository.RestaurantRepository;
 import ru.dsoccer1980.dishvote.repository.UserRepository;
 import ru.dsoccer1980.dishvote.repository.VoteRepository;
+import ru.dsoccer1980.dishvote.util.Exception.VoteException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,7 +43,7 @@ public class VoteServiceImpl implements VoteService {
             return voteRepository.save(userRepository.get(userId), restaurantRepository.get(restaurantId), date);
         }
         else {
-            return null;
+            throw new VoteException("you can not vote this date");
         }
     }
 
