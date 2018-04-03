@@ -15,16 +15,16 @@
             <tr>
                 <td>${restaurant.name}</td>
                 <td>${restaurant.address}</td>
-                <td><a href="restaurant?action=update&id=${restaurant.id}">update</a></td>
-                <td><a href="restaurant?action=delete&id=${restaurant.id}">delete</a></td>
-                <td><a href="restaurant?action=dish&id=${restaurant.id}">add/edit menu</a></td>
+                <td><a href="/restaurant/update/id/${restaurant.id}">update</a></td>
+                <td><a href="/restaurant/delete/id/${restaurant.id}">delete</a></td>
+                <td><a href="/restaurant/listdish/id/${restaurant.id}">add/edit menu</a></td>
             </tr>
           </c:forEach>
     </table>
 
     <br>
     Add new restaurant
-    <form action="restaurant?action=addRestaurant" method="post">
+    <form action="/restaurant/add" method="post">
         Name <input type="text" name="name"> <br>
         Address <input type="text" name="address"> <br>
         <input type="submit" name="submit" value="submit">

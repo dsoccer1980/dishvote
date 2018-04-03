@@ -18,8 +18,8 @@
                 <td>${dish.name}</td>
                 <td>${dish.price}</td>
                 <td>${dish.date}</td>
-                <td><a href="dish?action=update&id=${dish.id}">update</a></td>
-                <td><a href="dish?action=delete&id=${dish.id}">delete</a></td>
+                <td><a href="/dish/update/id/${dish.id}">update</a></td>
+                <td><a href="/dish/delete/id/${dish.id}">delete</a></td>
             </tr>
         </c:forEach>
     </table>
@@ -27,7 +27,7 @@
     <br>
 
     Add new dish
-    <form action="dish?action=addDish" method="post">
+    <form action="/dish/add" method="post">
         <input type="hidden" name="restaurant_id" value="${restaurant}">
         <c:set var="date" value="<%=LocalDate.now()%>"/>
         Data <input type="date"  name="date" required value="${date}"> <br>

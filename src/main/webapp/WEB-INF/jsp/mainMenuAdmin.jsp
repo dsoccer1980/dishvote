@@ -13,7 +13,7 @@ Admin panel <br><br>
     Hello <c:out value="${user.name}"/>  <br>
 
     <a href="">profile</a>    <br>
-    <a href="restaurant">Show restaurants</a>       <br>
+    <a href="/restaurant/show">Show restaurants</a>       <br>
     <a href="adminVote">Show votes</a>           <br>
     <a href="admin">Edit users</a>           <br>
 
