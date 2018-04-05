@@ -12,7 +12,6 @@ Admin panel <br><br>
 
     Hello <c:out value="${user.name}"/>  <br>
 
-    <a href="">profile</a>    <br>
     <a href="/rest/restaurant/show">Show restaurants</a>       <br>
     <a href="/rest/adminVote/show">Show votes</a>           <br>
     <a href="/rest/admin/showUsers">Edit users</a>           <br>
