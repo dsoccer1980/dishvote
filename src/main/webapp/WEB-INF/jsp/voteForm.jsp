@@ -9,12 +9,12 @@
 <body>
 <section>
 
-    <form method="post" action="/userVote/date/">
+    <form method="post" action="/rest/userVote/date/">
         <input type="date" name="date" value="${date}" onchange="document.getElementById('submitButton').click();">
         <input type="submit" name="submit" id="submitButton" hidden>
     </form>
 
-    <form method="post" action="/userVote/vote/">
+    <form method="post" action="/rest/userVote/vote/">
         <input type="hidden" name="date" value="${date}">
     <table border="1" cellpadding="8" cellspacing="0">
         <c:forEach items="${dishes}" var="entry">

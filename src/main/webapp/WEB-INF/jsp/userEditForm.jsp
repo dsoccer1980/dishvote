@@ -12,7 +12,7 @@
     <h2>Edit user</h2>
     <hr>
     <jsp:useBean id="user" type="ru.dsoccer1980.dishvote.model.User" scope="request"/>
-    <form action="/admin/editUser" method="post">
+    <form action="/rest/admin/editUser" method="post">
         <input type="hidden" name="id" value="${user.id}">
         <dl>
             <dt>Name:</dt>

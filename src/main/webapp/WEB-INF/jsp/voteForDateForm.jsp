@@ -9,7 +9,7 @@
 <body>
 <section>
 
-    <form method="get" action="/adminVote/show">
+    <form method="get" action="/rest/adminVote/show">
         <input type="date" name="date" value="${date}" onchange="document.getElementById('submitButton').click();">
         <input type="submit" name="submit" id="submitButton" hidden>
     </form>
@@ -22,7 +22,7 @@
 
                 <td>
                     <c:if test = "${entry.value > 0}" >
-                        <a href="/adminVote/showUsersByRestaurantAndDate/restaurant_id/${restaurant.id}/date/${date}">${restaurant.name}</a>
+                        <a href="/rest/adminVote/showUsersByRestaurantAndDate/restaurant_id/${restaurant.id}/date/${date}">${restaurant.name}</a>
                     </c:if>
                     <c:if test = "${entry.value == 0}" >
                         ${restaurant.name}

@@ -1,37 +1,69 @@
 package ru.dsoccer1980.dishvote.web.vote;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ru.dsoccer1980.dishvote.model.UserVote;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ru.dsoccer1980.dishvote.service.DishService;
 import ru.dsoccer1980.dishvote.service.VoteService;
 import ru.dsoccer1980.dishvote.util.Exception.VoteException;
+import ru.dsoccer1980.dishvote.web.AuthorizedUser;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Controller
+@RequestMapping(value = UserVoteRestController.REST_URL)
 public class UserVoteRestController {
-    private static final Logger log = LoggerFactory.getLogger(UserVoteRestController.class);
 
-    private final VoteService service;
+    static final String REST_URL = "/rest/userVote/";
 
     @Autowired
-    public UserVoteRestController(VoteService service) {
-        this.service = service;
+    private VoteService voteService;
+
+    @Autowired
+    private DishService dishService;
+
+    @GetMapping("/show")
+    public String userVoteGet(Model model) {
+        LocalDate date = LocalDate.now();
+        int userId = AuthorizedUser.getId();
+
+        model.addAttribute("date", date);
+        model.addAttribute("dishes", dishService.getDishOnDate(date));
+        model.addAttribute("allVotesForUser", voteService.getAllVotesForUser(userId));
+        return "voteForm";
     }
 
-    public UserVote save(Integer userId, Integer restaurantId, LocalDate date) {
-        log.info("save uservote(userId, restaurantId, date) :  {}, {}, {}", userId, restaurantId, date);
-        UserVote userVote = service.save(userId, restaurantId, date);
-        if (userVote == null) throw new VoteException("You can not vote this day more");
-        return userVote;
+    @PostMapping("/date")
+    public String userVoteChosenDate(Model model, HttpServletRequest request) {
+        LocalDate localDate = LocalDate.parse(request.getParameter("date"));
+        int userId = AuthorizedUser.getId();
+
+        model.addAttribute("date", localDate);
+        model.addAttribute("dishes", dishService.getDishOnDate(localDate));
+        model.addAttribute("allVotesForUser", voteService.getAllVotesForUser(userId));
+
+        return "voteForm";
     }
 
-    public List<UserVote> getAllVotesForUser(int userId) {
-        log.info("get all votes for user:  {}", userId);
-        return service.getAllVotesForUser(userId);
+    @PostMapping("/vote")
+    public String userVoteGiveVote(Model model, HttpServletRequest request) {
+        LocalDate date = LocalDate.parse(request.getParameter("date"));
+        int userId = AuthorizedUser.getId();
+
+        int restaurantId = Integer.parseInt(request.getParameter("restaurantId"));
+        try {
+            voteService.save(userId, restaurantId, date);
+        } catch (VoteException e) {
+            model.addAttribute("message", e.getMessage());
+        }
+        model.addAttribute("dishes", dishService.getDishOnDate(date));
+        model.addAttribute("allVotesForUser", voteService.getAllVotesForUser(userId));
+        model.addAttribute("date", date);
+        return "voteForm";
     }
 }

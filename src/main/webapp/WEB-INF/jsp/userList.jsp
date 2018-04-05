@@ -15,15 +15,15 @@
             <jsp:useBean id="user" scope="page" type="ru.dsoccer1980.dishvote.model.User"/>
             <tr>
                 <td>${user.name}</td>
-                <td><a href="/admin/userEditForm/id/${user.id}">Update</a></td>
-                <td><a href="/admin/userDelete/id/${user.id}">Delete</a></td>
+                <td><a href="/rest/admin/userEditForm/id/${user.id}">Update</a></td>
+                <td><a href="/rest/admin/userDelete/id/${user.id}">Delete</a></td>
             </tr>
           </c:forEach>
     </table>
 
     <br>
     Add new user
-    <form action="/admin/addUser" method="post">
+    <form action="/rest/admin/addUser" method="post">
         Name<input type="text" name="name"> <br>
         E-mail <input type="text" name="email"> <br>
         Password <input type="password" name="password"> <br>

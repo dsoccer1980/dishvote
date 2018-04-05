@@ -12,9 +12,9 @@
 
     Hello <c:out value="${user.name}"/>  <br>
 
-    <a href="/user/get">profile</a>    <br>
-    <a href="/userVote">vote</a>       <br>
-    <a href=""></a>           <br>
+    <a href="/rest/user/get">profile</a>    <br>
+    <a href="/rest/userVote/show">vote</a>       <br>
+
 
 
 </section>

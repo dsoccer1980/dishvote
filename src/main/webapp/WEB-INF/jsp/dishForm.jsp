@@ -12,7 +12,7 @@
     <h2>Edit dish</h2>
     <hr>
     <jsp:useBean id="dish" type="ru.dsoccer1980.dishvote.model.Dish" scope="request"/>
-    <form action="/dish/edit" method="post">
+    <form action="/rest/dish/edit" method="post">
         <input type="hidden" name="id" value="${dish.id}" >
         <input type="hidden" name="restaurant_id" value="${dish.restaurant.id}" >
         <input type="hidden" name="date" value="${dish.date}" >
@@ -21,7 +21,7 @@
             <dd><input type="text" value="${dish.name}" name="name" required></dd>
         </dl>
         <dl>
-            <dt>Address:</dt>
+            <dt>Price:</dt>
             <dd><input type="text" value="${dish.price}" name="price" required></dd>
         </dl>
         <dl>

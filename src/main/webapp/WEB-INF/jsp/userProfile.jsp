@@ -13,7 +13,7 @@
     <hr>
     <c:set var="user" value="${user}"/>
     <jsp:useBean id="user" type="ru.dsoccer1980.dishvote.model.User" scope="request"/>
-    <form action="/user/update" method="post">
+    <form action="/rest/user/update" method="post">
         <input type="hidden" name="id" value="${user.id}">
         <dl>
             <dt>Name:</dt>
