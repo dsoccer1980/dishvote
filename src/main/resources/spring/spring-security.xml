@@ -4,25 +4,29 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http pattern="/resources/**" security="none"/>
-    <http pattern="/webjars/**" security="none"/>
-
-    <http pattern="/rest/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
-        <http-basic/>
+    <http auto-config="true">
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/adminVote/**" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/rest/user/**" access="isAuthenticated()"/>
-        <intercept-url pattern="/rest/userVote/**" access="isAuthenticated()"/>
-        <intercept-url pattern="/rest/restaurant/**" access="isAuthenticated()"/>
-        <intercept-url pattern="/rest/dish/**" access="isAuthenticated()"/>
-        <csrf disabled="true"/>
+        <intercept-url pattern="/rest/user/**" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/rest/userVote/**" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/rest/restaurant/**" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/rest/dish/**" access="hasAnyRole('ROLE_USER')"/>
+
+        <form-login login-page="/login" default-target-url="/loginPage" authentication-failure-url="/login?error"
+                    username-parameter="username" password-parameter="password"/>
+
+        <logout logout-success-url="/login?logout"/>
     </http>
 
-    <beans:bean name="noopEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
-
-    <authentication-manager>
-        <authentication-provider user-service-ref="userService">
-            <password-encoder ref="noopEncoder"/>
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="noopEncoder"></password-encoder>
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="userDetailsServiceImpl"
+                class="ru.dsoccer1980.dishvote.service.UserServiceImpl"></beans:bean>
+
+    <beans:bean name="noopEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
 </beans:beans>
