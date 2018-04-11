@@ -33,6 +33,7 @@
         Data <input type="date"  name="date" required value="${date}"> <br>
         Name<input type="text" name="name"> <br>
         Price <input type="text" name="price"> <br>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" name="submit" value="submit">
     </form>
 </section>

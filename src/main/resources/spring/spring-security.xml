@@ -10,8 +10,8 @@
         <intercept-url pattern="/rest/adminVote/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/user/**" access="hasAnyRole('ROLE_USER')"/>
         <intercept-url pattern="/rest/userVote/**" access="hasAnyRole('ROLE_USER')"/>
-        <intercept-url pattern="/rest/restaurant/**" access="hasAnyRole('ROLE_USER')"/>
-        <intercept-url pattern="/rest/dish/**" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/rest/restaurant/**" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/rest/dish/**" access="hasAnyRole('ROLE_ADMIN')"/>
 
         <form-login login-page="/login" default-target-url="/loginPage" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>

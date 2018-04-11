@@ -11,6 +11,7 @@
 
     <form method="post" action="/rest/userVote/date/">
         <input type="date" name="date" value="${date}" onchange="document.getElementById('submitButton').click();">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" name="submit" id="submitButton" hidden>
     </form>
 
@@ -30,6 +31,7 @@
             </tr>
         </c:forEach>
     </table>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" name="submit">
     </form>
 

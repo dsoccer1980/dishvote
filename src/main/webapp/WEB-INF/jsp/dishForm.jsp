@@ -28,6 +28,7 @@
             <dt>Date:</dt>
             <dd>${dish.date}</dd>
         </dl>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <button type="submit">Save</button>
         <button onclick="window.history.back()" type="button">Cancel</button>
     </form>

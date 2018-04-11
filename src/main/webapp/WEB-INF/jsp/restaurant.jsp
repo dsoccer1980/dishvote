@@ -27,6 +27,7 @@
     <form action="/rest/restaurant/add" method="post">
         Name <input type="text" name="name"> <br>
         Address <input type="text" name="address"> <br>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" name="submit" value="submit">
     </form>
 </section>

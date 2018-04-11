@@ -33,6 +33,7 @@
                 no<input type="radio" name="enabled" value="false"> <br>
         Is admin no<input type="radio" name="is_admin" value="false" checked="checked">
                  yes<input type="radio" name="is_admin" value="true"> <br>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" name="submit" value="submit">
     </form>
 </section>
