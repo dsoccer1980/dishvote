@@ -3,7 +3,9 @@ package ru.dsoccer1980.dishvote.service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
@@ -24,6 +26,7 @@ import static ru.dsoccer1980.dishvote.testdata.UserTestData.*;
 public class UserServiceTest {
 
     @Autowired
+    @Qualifier(value = "userDetailsServiceImpl")
     protected UserService service;
 
     @Test

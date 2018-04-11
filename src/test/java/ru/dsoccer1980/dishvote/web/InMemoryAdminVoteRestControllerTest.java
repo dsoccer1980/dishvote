@@ -29,37 +29,37 @@ import static ru.dsoccer1980.dishvote.testdata.UserTestData.USER1;
 @RunWith(SpringRunner.class)
 public class InMemoryAdminVoteRestControllerTest {
 
-    @Autowired
-    private AdminVoteRestController controller;
-
-    @Autowired
-    private InMemoryUserVoteRepositoryImpl repository;
-
-    @Autowired
-    private InMemoryUserRepositoryImpl userRepository;
-
-    @Autowired
-    private InMemoryRestaurantRepositoryImpl restaurantRepository;
-
-    @Before
-    public void setUp() throws Exception {
-        repository.init();
-        userRepository.init();
-        restaurantRepository.init();
-    }
-
-    @Test
-    public void testGetAllVotesForDate() {
-        Map<Restaurant, Long> allVotesForDate = controller.getVotesForRestaurantOnDate(TEST_DATE);
-        Map<Restaurant, Long> expected = new ConcurrentHashMap<>();
-        expected.put(RESTAURANT1, 1L);
-        assertThat(allVotesForDate).isEqualTo(expected);
-    }
-
-    @Test
-    public void testGetVotesOfUsersByRestaurantAndDate() {
-        List<User> votesOfUsersByRestaurantAndDate = controller.getVotesOfUsersByRestaurantAndDate(RESTAURANT_ID1, TEST_DATE);
-        assertThat(votesOfUsersByRestaurantAndDate).isEqualTo(Arrays.asList(USER1));
-    }
+//    @Autowired
+//    private AdminVoteRestController controller;
+//
+//    @Autowired
+//    private InMemoryUserVoteRepositoryImpl repository;
+//
+//    @Autowired
+//    private InMemoryUserRepositoryImpl userRepository;
+//
+//    @Autowired
+//    private InMemoryRestaurantRepositoryImpl restaurantRepository;
+//
+//    @Before
+//    public void setUp() throws Exception {
+//        repository.init();
+//        userRepository.init();
+//        restaurantRepository.init();
+//    }
+//
+//    @Test
+//    public void testGetAllVotesForDate() {
+//        Map<Restaurant, Long> allVotesForDate = controller.getVotesForRestaurantOnDate(TEST_DATE);
+//        Map<Restaurant, Long> expected = new ConcurrentHashMap<>();
+//        expected.put(RESTAURANT1, 1L);
+//        assertThat(allVotesForDate).isEqualTo(expected);
+//    }
+//
+//    @Test
+//    public void testGetVotesOfUsersByRestaurantAndDate() {
+//        List<User> votesOfUsersByRestaurantAndDate = controller.getVotesOfUsersByRestaurantAndDate(RESTAURANT_ID1, TEST_DATE);
+//        assertThat(votesOfUsersByRestaurantAndDate).isEqualTo(Arrays.asList(USER1));
+//    }
 
 }

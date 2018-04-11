@@ -25,43 +25,43 @@ import static ru.dsoccer1980.dishvote.testdata.UserVoteTestData.*;
 @RunWith(SpringRunner.class)
 public class InMemoryUserVoteRestControllerTest {
 
-    @Autowired
-    private UserVoteRestController controller;
-
-    @Autowired
-    private InMemoryUserVoteRepositoryImpl repository;
-
-    @Autowired
-    private InMemoryUserRepositoryImpl userRepository;
-
-    @Autowired
-    private InMemoryRestaurantRepositoryImpl restaurantRepository;
-
-    @Before
-    public void setUp() throws Exception {
-        repository.init();
-        userRepository.init();
-        restaurantRepository.init();
-    }
-
-    @Test
-    public void testGetAllVotesForUser() {
-        List<UserVote> allVotesForUser = controller.getAllVotesForUser(USER_ID1);
-        assertMatch(allVotesForUser, USER_VOTE1);
-    }
-
-    @Test
-    public void testSave() {
-        UserVote newUserVote = controller.save(USER_ID1, RESTAURANT_ID1, LocalDate.now().plusDays(1));
-        List<UserVote> allVotesForUser = controller.getAllVotesForUser(USER_ID1);
-        assertMatch(allVotesForUser, newUserVote, USER_VOTE1);
-    }
-
-    @Test(expected = VoteException.class)
-    public void testSaveCannotVoteAfterDeadLine() {
-        UserVote newUserVote = controller.save(USER_ID1, RESTAURANT_ID1, LocalDate.now().minusDays(1));
-        List<UserVote> allVotesForUser = controller.getAllVotesForUser(USER_ID1);
-        assertMatch(allVotesForUser, newUserVote, USER_VOTE1);
-    }
+//    @Autowired
+//    private UserVoteRestController controller;
+//
+//    @Autowired
+//    private InMemoryUserVoteRepositoryImpl repository;
+//
+//    @Autowired
+//    private InMemoryUserRepositoryImpl userRepository;
+//
+//    @Autowired
+//    private InMemoryRestaurantRepositoryImpl restaurantRepository;
+//
+//    @Before
+//    public void setUp() throws Exception {
+//        repository.init();
+//        userRepository.init();
+//        restaurantRepository.init();
+//    }
+//
+//    @Test
+//    public void testGetAllVotesForUser() {
+//        List<UserVote> allVotesForUser = controller.getAllVotesForUser(USER_ID1);
+//        assertMatch(allVotesForUser, USER_VOTE1);
+//    }
+//
+//    @Test
+//    public void testSave() {
+//        UserVote newUserVote = controller.save(USER_ID1, RESTAURANT_ID1, LocalDate.now().plusDays(1));
+//        List<UserVote> allVotesForUser = controller.getAllVotesForUser(USER_ID1);
+//        assertMatch(allVotesForUser, newUserVote, USER_VOTE1);
+//    }
+//
+//    @Test(expected = VoteException.class)
+//    public void testSaveCannotVoteAfterDeadLine() {
+//        UserVote newUserVote = controller.save(USER_ID1, RESTAURANT_ID1, LocalDate.now().minusDays(1));
+//        List<UserVote> allVotesForUser = controller.getAllVotesForUser(USER_ID1);
+//        assertMatch(allVotesForUser, newUserVote, USER_VOTE1);
+//    }
 
 }
