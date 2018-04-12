@@ -13,10 +13,10 @@
         <intercept-url pattern="/rest/restaurant/**" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/dish/**" access="hasAnyRole('ROLE_ADMIN')"/>
 
-        <form-login login-page="/login" default-target-url="/loginPage" authentication-failure-url="/login?error"
+        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>
 
-        <logout logout-success-url="/login?logout"/>
+        <logout logout-success-url="/login?logout" invalidate-session="true"/>
     </http>
 
     <authentication-manager alias="authenticationManager">

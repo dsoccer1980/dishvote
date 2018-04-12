@@ -18,5 +18,6 @@ Admin panel <br><br>
 
 
 </section>
+<jsp:include page="pageFooter.jsp"/>
 </body>
 </html>

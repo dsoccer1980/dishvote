@@ -31,5 +31,6 @@
         <input type="submit" name="submit" value="submit">
     </form>
 </section>
+<jsp:include page="pageFooter.jsp"/>
 </body>
 </html>

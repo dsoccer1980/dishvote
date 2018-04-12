@@ -29,7 +29,7 @@ public class RootController {
         }
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping("/login")
     public String login(Model model, String error, String logout) {
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");

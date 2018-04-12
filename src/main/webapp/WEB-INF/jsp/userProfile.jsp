@@ -33,5 +33,7 @@
     </form>
 
 </section>
+
+<jsp:include page="pageFooter.jsp"/>
 </body>
 </html>

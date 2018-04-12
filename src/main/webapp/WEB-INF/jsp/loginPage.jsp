@@ -8,7 +8,7 @@
 <form method="POST" action="login">
     <h2>Log in</h2>
 
-    <div class="form-group ${error != null ? 'has-error' : ''}">
+    <div>
         <span>${message}</span>
         <input name="username" id="username" type="text"  placeholder="Username"
                autofocus="true"/>
@@ -17,7 +17,6 @@
         <span>${error}</span>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
     </div>
-
 </form>
 
 <button type="submit" class="btn btn-lg btn-primary" onclick="setCredentials('user1@yandex.ru', 'password')">
