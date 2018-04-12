@@ -1,5 +1,7 @@
 package ru.dsoccer1980.dishvote.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +25,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository repository;
 
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
@@ -31,28 +35,33 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User get(int id) throws NotFoundException {
+        log.info("get user with (Id) :  {} ", id);
         return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
     public void update(User user) throws NotFoundException {
+        log.info("update user:  {} ", user);
         Assert.notNull(user, "user must not be null");
         checkNotFoundWithId(repository.save(user), user.getId());
     }
 
     @Override
     public List<User> getAll() {
+        log.info("get all users");
         return repository.getAll();
     }
 
     @Override
     public User create(User user) {
+        log.info("create user:  {} ", user);
         Assert.notNull(user, "user must not be null");
         return repository.save(user);
     }
 
     @Override
     public void delete(int id) throws NotFoundException {
+        log.info("delete user with (Id) :  {} ", id);
         checkNotFoundWithId(repository.delete(id), id);
     }
 
